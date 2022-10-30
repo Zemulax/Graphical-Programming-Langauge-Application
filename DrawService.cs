@@ -1,5 +1,4 @@
-﻿using DocumentFormat.OpenXml.Office2016.Drawing;
-
+﻿
 namespace MyAssignment
 {
     internal class DrawService

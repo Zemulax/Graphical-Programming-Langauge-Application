@@ -1,25 +1,23 @@
 ﻿
+
 namespace MyAssignment
 {
-    internal class DrawService
+    /// <summary>
+    /// this class is used to draw
+    /// </summary>
+    internal class DrawService 
     {
-       private readonly Graphics graphics;
-
-        
+        private readonly Graphics graphics;
+        /// <summary>
+        /// constructor for drawing graphics
+        /// </summary>
+        /// <param name="graphics">where the graphics should be drawn</param>
         public DrawService(Graphics graphics)
         {
             this.graphics = graphics;
-            
         }
 
-        public void Drawers()
-        {
-            
-            Pen mypen = new(Color.White, 7);
-            graphics.DrawLine(mypen, 10, 10, 100, 100);
-        }
 
-       
-
+   
     }
 }

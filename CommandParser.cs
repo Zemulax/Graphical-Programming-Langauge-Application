@@ -1,69 +1,84 @@
 ﻿
+
+using DocumentFormat.OpenXml.Drawing;
+
 namespace MyAssignment
 {
     /// <summary>
     /// this class parses and executes all commands
     /// </summary>
-    internal class CommandParser  
+    internal class CommandParser  : DrawService
     {
+        readonly DrawService drawService;
+        readonly Rectangle1 rect = null;
         readonly int[] cordinates = new int[3];
-        private string command;
-        private readonly Graphics graphics;
-        readonly Rectangle1? rect = null;
+        private string command = null;
 
+        private bool fill;
+        
         /// <summary>
         /// commandParser constructor 
         /// </summary>
         /// <param name="graphics">surface where the drawing will happen</param>
         /// <param name="commands">an array of commands to be parsed</param>
-        public CommandParser(Graphics graphics,string[] commands)
+        public CommandParser(Graphics g,string[] commands, string fillers)  : base(g)
         {
-            this.graphics = graphics;
-
+            if(fillers.Equals("fill on")){
+                this.fill = true;
+            }
+            
+            drawService = new DrawService(Graphic);
             for (int i = 0; i < commands.Length; i++)
             {
 
                     try
                     {
-                        IEnumerable<string> values = commands[i].Split(" "); //split the first item in the array
+                        IEnumerable<string> values = commands[i].Split(" "); //split the first item in the array by space
                         string firstCommand = values.First();
-                        int xCord = int.Parse(values.Skip(1).First());
-                        int yCord = int.Parse(values.Last());
+                        int parameter1 = int.Parse(values.Skip(1).First());
+                        int parameter2 = int.Parse(values.Last());
 
 
-                        cordinates[0] = xCord;
-                        cordinates[1] = yCord;
+                        cordinates[0] = parameter1;
+                        cordinates[1] = parameter2;
 
-                        switch (firstCommand)
-                        {
-
-                            case "rectangle":
-                                this.command = firstCommand;
-                                rect = new Rectangle1(100, 100, yCord, xCord);
-                                rect.DrawShape(graphics);
-                                break;
-
-                            case "":
-                                MessageBox.Show("Have you entered a command?");
-                                break;
-
-                            default:
-                                MessageBox.Show("wrong command");
-                                break;
-                        }
-                    }
-
-                    catch (FormatException)
+                    switch (firstCommand.ToLower()) //uniform all input
                     {
-                        MessageBox.Show("You might have entered an incorrect parameter!");
+
+                        case "drawto":
+                           
+                            drawService.DrawTo(parameter1, parameter2);
+                            //MessageBox.Show(YPos + "" + XPos);
+                            break;
+
+                        case "rect":
+                            rect = new Rectangle1(XPos,YPos, parameter1, parameter2);
+                            rect.DrawShape(Graphic,fill);
+                            break;
+
+                        case "circle":
+                            Circle circle = new (XPos, YPos, parameter1, parameter2);
+                            circle.DrawShape(Graphic,fill);
+
+                            break;
+                        case "moveto":
+                            drawService.MoveTo(parameter1, parameter2);
+                            break;
+
+                        default:
+                            MessageBox.Show("wrong command");
+                            break;
+                    }
+                }
+
+                catch (FormatException)
+                    {
+                        MessageBox.Show("You might have entered an incorrect parameter at " + i);
                     }
                     catch (InvalidOperationException)
                     {
                         MessageBox.Show("You might have forgotten a Parameter!");
-                    }
-                
-
-                
+                    }   
              }
         }
 

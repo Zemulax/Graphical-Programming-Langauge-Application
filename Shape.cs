@@ -6,8 +6,8 @@ namespace MyAssignment
     /// </summary>
     internal abstract class Shape : ShapesInterface
     {
-        private int xPosition;
-        private int yPosition;
+        private int xPosition = 200;
+        private int yPosition = 200;
         
         /// <summary>
         /// empty constructor
@@ -48,6 +48,6 @@ namespace MyAssignment
        /// Every object of shape must have this method
        /// </summary>
        /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
-        public abstract void DrawShape(Graphics graphics);
+        public abstract void DrawShape(Graphics graphics, bool fill);
     }
 }

@@ -1,17 +1,20 @@
 ﻿
+using System.Data;
+
 namespace MyAssignment
 {
     /// <summary>
     /// this class is an instance of shape base class.
     /// it can be used to draw rectangle shapes
     /// </summary>
-    internal class Rectangle1 : Shape 
+    internal class Rectangle1 : Shape
     {
-        
+
         private int length;
         private int width;
-        readonly Pen myPen = new(Color.Green);
-        Brush brush = new SolidBrush(Color.Magenta);
+        private Pen myPen = new Pen(Color.White,5);
+        Brush brush = new SolidBrush(Color.White);
+        bool fill = true;
 
         /// <summary>
         /// empty constructor
@@ -30,7 +33,7 @@ namespace MyAssignment
         public Rectangle1(int xPos, int yPos, int width, int length) : base(xPos, yPos)
         {
             this.width = width;
-            this.length = length;   
+            this.length = length;
         }
 
 
@@ -56,18 +59,31 @@ namespace MyAssignment
             get { return width; }
         }
 
+        public Pen MyPen
+        {
+            get { return myPen; }
+            set { myPen = value; }
+        }
+
         /// <summary>
         /// draw method for rectangle class
         /// this method draws the rectangle with specified parameters
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
-        public override void DrawShape(Graphics graphics)
+        public override void DrawShape(Graphics graphics, bool fill)
         {
-
-            graphics.DrawRectangle(myPen, XPosition, YPosition, Width,Length);
-            graphics.FillRectangle(brush, XPosition, YPosition, Width, Length);
+            if(fill == true)
+            {
+                graphics.DrawRectangle(myPen, XPosition, YPosition, Width, Length);
+                graphics.FillRectangle(brush, XPosition, YPosition, Width,Length);
+            }
+            else
+            {
+                graphics.DrawRectangle(myPen, XPosition, YPosition, Width, Length);
+            }
         }
 
+        
         //rectangle method that calls draw, takes in command and parameters
 
        

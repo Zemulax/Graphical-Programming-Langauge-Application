@@ -7,13 +7,13 @@ namespace MyAssignment
     /// this class is an instance of shape base class.
     /// it can be used to draw rectangle shapes
     /// </summary>
-    internal class Circle : Shape
+    public class Circle : Shape
     {
 
         int radius;
-        int radius1;
-        private Pen myPen = new Pen(Color.White, 5);
-        Brush brush = new SolidBrush(Color.Magenta);
+        readonly int radius1;
+        private readonly Pen myPen = new (Color.White, 5);
+        readonly Brush brush = new SolidBrush(Color.Magenta);
 
         /// <summary>
         /// empty constructor
@@ -61,8 +61,6 @@ namespace MyAssignment
             {
                 graphics.DrawEllipse(myPen, new Rectangle(XPosition, YPosition, radius, radius1));
             }
-
-            // graphics.FillRectangle(brush, XPosition, YPosition, Width, Length);
         }
 
 

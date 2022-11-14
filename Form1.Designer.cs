@@ -38,6 +38,8 @@
             this.Fill = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.FillOn = new System.Windows.Forms.RadioButton();
+            this.FillOff = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -48,8 +50,7 @@
             this.InputField.Name = "InputField";
             this.InputField.Size = new System.Drawing.Size(316, 27);
             this.InputField.TabIndex = 2;
-            this.InputField.Text = "drawto 60 60";
-            this.InputField.TextChanged += new System.EventHandler(this.InputField_TextChanged);
+            this.InputField.Text = "triangle 90";
             this.InputField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputField_KeyDown);
             // 
             // MainDisplay
@@ -72,7 +73,6 @@
             this.CommandLine.Size = new System.Drawing.Size(316, 401);
             this.CommandLine.TabIndex = 4;
             this.CommandLine.Text = "";
-            this.CommandLine.TextChanged += new System.EventHandler(this.CommandLine_TextChanged);
             // 
             // Enter
             // 
@@ -92,7 +92,7 @@
             this.Clear.BackColor = System.Drawing.Color.Red;
             this.Clear.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Clear.ForeColor = System.Drawing.SystemColors.Window;
-            this.Clear.Location = new System.Drawing.Point(1166, 547);
+            this.Clear.Location = new System.Drawing.Point(1177, 546);
             this.Clear.Name = "Clear";
             this.Clear.Size = new System.Drawing.Size(94, 63);
             this.Clear.TabIndex = 6;
@@ -105,7 +105,7 @@
             this.Save.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Save.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Save.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Save.Location = new System.Drawing.Point(552, 547);
+            this.Save.Location = new System.Drawing.Point(543, 545);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(94, 65);
             this.Save.TabIndex = 7;
@@ -118,9 +118,9 @@
             this.Load.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Load.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Load.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Load.Location = new System.Drawing.Point(1040, 547);
+            this.Load.Location = new System.Drawing.Point(1054, 544);
             this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(94, 65);
+            this.Load.Size = new System.Drawing.Size(103, 65);
             this.Load.TabIndex = 7;
             this.Load.Text = "Load";
             this.Load.UseVisualStyleBackColor = false;
@@ -131,13 +131,12 @@
             this.Fill.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Fill.Font = new System.Drawing.Font("Unispace", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Fill.ForeColor = System.Drawing.Color.MintCream;
-            this.Fill.Location = new System.Drawing.Point(675, 547);
+            this.Fill.Location = new System.Drawing.Point(660, 546);
             this.Fill.Name = "Fill";
-            this.Fill.Size = new System.Drawing.Size(349, 65);
+            this.Fill.Size = new System.Drawing.Size(265, 65);
             this.Fill.TabIndex = 8;
             this.Fill.Text = "Fill";
             this.Fill.UseVisualStyleBackColor = false;
-            this.Fill.Click += new System.EventHandler(this.Fill_Click);
             // 
             // panel1
             // 
@@ -153,17 +152,43 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Unispace", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(352, 25);
+            this.label1.Location = new System.Drawing.Point(449, 28);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(452, 48);
+            this.label1.Size = new System.Drawing.Size(332, 48);
             this.label1.TabIndex = 0;
-            this.label1.Text = "WINDOWS DRAW CLONE";
+            this.label1.Text = "SHAPE CREATOR";
+            // 
+            // FillOn
+            // 
+            this.FillOn.AutoSize = true;
+            this.FillOn.Location = new System.Drawing.Point(931, 550);
+            this.FillOn.Name = "FillOn";
+            this.FillOn.Size = new System.Drawing.Size(72, 24);
+            this.FillOn.TabIndex = 10;
+            this.FillOn.TabStop = true;
+            this.FillOn.Text = "Fill On";
+            this.FillOn.UseVisualStyleBackColor = true;
+            this.FillOn.CheckedChanged += new System.EventHandler(this.FillOn_CheckedChanged);
+            // 
+            // FillOff
+            // 
+            this.FillOff.AutoSize = true;
+            this.FillOff.Location = new System.Drawing.Point(931, 585);
+            this.FillOff.Name = "FillOff";
+            this.FillOff.Size = new System.Drawing.Size(74, 24);
+            this.FillOff.TabIndex = 11;
+            this.FillOff.TabStop = true;
+            this.FillOff.Text = "Fill Off";
+            this.FillOff.UseVisualStyleBackColor = true;
+            this.FillOff.CheckedChanged += new System.EventHandler(this.FillOff_CheckedChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 720);
+            this.ClientSize = new System.Drawing.Size(1299, 720);
+            this.Controls.Add(this.FillOff);
+            this.Controls.Add(this.FillOn);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Fill);
             this.Controls.Add(this.Load);
@@ -194,5 +219,7 @@
         private Button Fill;
         private Panel panel1;
         private Label label1;
+        private RadioButton FillOn;
+        private RadioButton FillOff;
     }
 }

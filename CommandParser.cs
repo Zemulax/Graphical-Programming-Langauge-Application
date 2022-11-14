@@ -1,20 +1,18 @@
 ﻿
 
-using DocumentFormat.OpenXml.Drawing;
-
 namespace MyAssignment
 {
     /// <summary>
     /// this class parses and executes all commands
     /// </summary>
-    internal class CommandParser  : DrawService
+    public class CommandParser  : DrawService
     {
-        readonly DrawService drawService;
-        readonly Rectangle1 rect = null;
+        readonly DrawService? drawService;
+        readonly Rectangle1? rect = null;
         readonly int[] cordinates = new int[3];
-        private string command = null;
+        private string? command = null;
 
-        private bool fill;
+        private readonly bool fill;
         
         /// <summary>
         /// commandParser constructor 
@@ -23,35 +21,46 @@ namespace MyAssignment
         /// <param name="commands">an array of commands to be parsed</param>
         public CommandParser(Graphics g,string[] commands, string fillers)  : base(g)
         {
-            if(fillers.Equals("fill on")){
-                this.fill = true;
+            drawService = new DrawService(Graphic);
+            if (fillers.Equals("fill on")){
+                fill = true;
             }
             
-            drawService = new DrawService(Graphic);
+           // drawService = new DrawService(Graphic,xposition,yposition);
             for (int i = 0; i < commands.Length; i++)
             {
+               try
+                  {
+                     string[] separators = { " ", "," };
+                     IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
+                     string firstCommand = values.First();
+                     int parameter1 = int.Parse(values.Skip(1).First());
+                     int parameter2 = int.Parse(values.Last());
 
-                    try
-                    {
-                        IEnumerable<string> values = commands[i].Split(" "); //split the first item in the array by space
-                        string firstCommand = values.First();
-                        int parameter1 = int.Parse(values.Skip(1).First());
-                        int parameter2 = int.Parse(values.Last());
 
-
-                        cordinates[0] = parameter1;
-                        cordinates[1] = parameter2;
+                    cordinates[0] = parameter1;
+                    cordinates[1] = parameter2;
 
                     switch (firstCommand.ToLower()) //uniform all input
                     {
-
-                        case "drawto":
-                           
-                            drawService.DrawTo(parameter1, parameter2);
-                            //MessageBox.Show(YPos + "" + XPos);
+                        case "moveto":
+                            drawService.MoveTo(parameter1, parameter2);
                             break;
 
-                        case "rect":
+                        case "triangle":
+                            Triangle triangle = new(XPos, YPos);
+                            drawService.DrawTo(200, 50);
+                            drawService.DrawTo(100, 200);
+                            drawService.DrawTo(50, 50);
+
+
+
+                            break;
+                        case "drawto":
+                            drawService.DrawTo(parameter1, parameter2);
+                            break;
+
+                        case "rectangle":
                             rect = new Rectangle1(XPos,YPos, parameter1, parameter2);
                             rect.DrawShape(Graphic,fill);
                             break;
@@ -59,14 +68,11 @@ namespace MyAssignment
                         case "circle":
                             Circle circle = new (XPos, YPos, parameter1, parameter2);
                             circle.DrawShape(Graphic,fill);
-
                             break;
-                        case "moveto":
-                            drawService.MoveTo(parameter1, parameter2);
-                            break;
+                       
 
                         default:
-                            MessageBox.Show("wrong command");
+                            MessageBox.Show("Unrecognised command at line "+ i);
                             break;
                     }
                 }
@@ -77,10 +83,11 @@ namespace MyAssignment
                     }
                     catch (InvalidOperationException)
                     {
-                        MessageBox.Show("You might have forgotten a Parameter!");
+                        MessageBox.Show("You might have forgotten a Parameter at line " + i);
                     }   
              }
         }
+
 
         /// <summary>
         /// sets and gets the value of command
@@ -98,6 +105,5 @@ namespace MyAssignment
         {
             get { return cordinates; }
         }
-
     }
 }

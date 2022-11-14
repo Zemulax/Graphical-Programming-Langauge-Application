@@ -1,7 +1,5 @@
 
 
-using DocumentFormat.OpenXml.Drawing.ChartDrawing;
-
 namespace MyAssignment
 {
     /// <summary>
@@ -11,9 +9,7 @@ namespace MyAssignment
     public partial class Form1 : Form
     {
         
-        readonly DrawService MyDraw;
-        readonly Bitmap DisplayBitmap;
-        CommandParser commandParser;
+        readonly DrawService MyDraw = new();
 
         /// <summary>
         ///  constructor for form class
@@ -21,9 +17,8 @@ namespace MyAssignment
         public Form1()
         {
             InitializeComponent();
-            DisplayBitmap = new Bitmap(488, 401);
-            MyDraw = new DrawService(Graphics.FromImage(DisplayBitmap));
-            MyDraw.MoveTo(MyDraw.XPos,MyDraw.yPos);
+            MyDraw = new DrawService(Graphics.FromImage(MyDraw.DisplayBitmap));
+
         }
 
         /// <summary>
@@ -44,7 +39,7 @@ namespace MyAssignment
         private void MainDisplay_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            graphics.DrawImageUnscaled(DisplayBitmap,0,0);
+            graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, MyDraw.XPos, MyDraw.YPos);
         }
 
         /// <summary>
@@ -56,88 +51,51 @@ namespace MyAssignment
         {
             if (InputField.Text == "run" || InputField.Text == "")
             {
-                CommandParser commandParser = new(Graphics.FromImage(DisplayBitmap), CommandLine.Lines, Fill.Text);
+                CommandParser commandParser = new(Graphics.FromImage(MyDraw.DisplayBitmap), CommandLine.Lines, Fill.Text.ToLower());
                 
             }
 
             else
             {
-               CommandParser commandParser = new(Graphics.FromImage(DisplayBitmap), InputField.Lines, Fill.Text.ToLower());
-
-               
-               
+               CommandParser commandParser = new(Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines, Fill.Text.ToLower());
             }
 
             InputField.Clear();
             Refresh();
         }
 
-        private void CommandLine_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Clear_Click(object sender, EventArgs e)
         {
             
-            Graphics graphics = Graphics.FromImage(DisplayBitmap);
+            Graphics graphics = Graphics.FromImage(MyDraw.DisplayBitmap);
             graphics.Clear(Color.MidnightBlue);
            
             Refresh();
         }
 
-        private void InputField_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        /// <summary>
-        /// saves a users program from the command line
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Save_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new()
-            {
-                Filter = "Text files (*.txt)|*.txt|All files (*.*)|*.*",
-                Title = "Save My Program"
-            };
-
-            saveFileDialog.ShowDialog();
-            if(saveFileDialog.FileName != "")
-            {
-               string myProgramName = saveFileDialog.FileName;
-               TextWriter writer = new StreamWriter(myProgramName);
-               writer.WriteLine(CommandLine.Text);
-               MessageBox.Show("Program has been saved!");
-               writer.Close();
-            }
-
+            //save program
+            Functionalities functionalities = new (CommandLine.Text);
+            CommandLine.Text = functionalities.SaveProgram();
         }
 
-        /// <summary>
-        /// Loads a program from the users computer
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Load_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new();
-
-            openFileDialog.ShowDialog(this);
-            if(openFileDialog.FileName != "")
-            {
-                StreamReader reader = new (openFileDialog.FileName);
-                CommandLine.Text = reader.ReadToEnd();
-            }
+        { 
+            Functionalities functionalities = new(CommandLine.Text);
+            CommandLine.Text = functionalities.LoadProgram();
         }
 
-        private void Fill_Click(object sender, EventArgs e)
+        private void FillOn_CheckedChanged(object sender, EventArgs e)
         {
-
             Fill.Text = "Fill On";
             Fill.BackColor = Color.RebeccaPurple;
+        }
+
+        private void FillOff_CheckedChanged(object sender, EventArgs e)
+        {
+            Fill.Text = "Fill Off";
+            Fill.BackColor = Color.Magenta;
         }
     }
 }

@@ -1,18 +1,21 @@
 ﻿
 
+using DocumentFormat.OpenXml.Drawing;
+
 namespace MyAssignment
 {
     /// <summary>
     /// this class is used to draw
     /// </summary>
-    internal class DrawService 
+    public class DrawService
     {
         private readonly Graphics graphics;
-        public int xPos = 20;
-        public int yPos = 20;
-        Pen pen = new(Color.White,5);
-        
-        
+        readonly Bitmap displayBitmap = new(800, 400);
+        private int xPos = 50;
+        private int yPos = 50;
+        readonly Pen pen = new(Color.White, 5);
+
+
         /// <summary>
         /// constructor for drawing graphics
         /// </summary>
@@ -22,6 +25,16 @@ namespace MyAssignment
             this.graphics = graphics;
         }
 
+        public void Clear()
+        {
+            MessageBox.Show("clearing");
+            graphics.Clear(Color.Red);    
+        }
+        public DrawService() { }
+        public Bitmap DisplayBitmap
+        {
+            get { return displayBitmap; }
+        }
         public Graphics Graphic
         {
             get { return graphics; }
@@ -40,19 +53,17 @@ namespace MyAssignment
             get { return yPos; }
         }
 
+       
         public void DrawTo(int toX, int toY)
         {
-            graphics.DrawLine(pen,xPos, yPos, toX, toY);
-            
-
-        }
-        public int MoveTo(int x, int y)
-        {
-            graphics.DrawRectangle(pen,YPos, XPos, 5, 5);
-            return x;
-            
-
+            graphics.DrawLine(pen, xPos, yPos, toX, toY);
+            xPos = toX;
+            yPos = toY;
         }
         
+        public void MoveTo(int toX, int toY)
+        {
+            graphics.DrawRectangle(pen, xPos, yPos, toX, toY);
+        }
     }
 }

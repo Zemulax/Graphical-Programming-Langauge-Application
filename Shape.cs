@@ -4,7 +4,7 @@ namespace MyAssignment
     /// <summary>
     /// this is the base class shape from which all shape objects are originated
     /// </summary>
-    internal abstract class Shape : ShapesInterface
+    public abstract class Shape : ShapesInterface
     {
         private int xPosition = 200;
         private int yPosition = 200;

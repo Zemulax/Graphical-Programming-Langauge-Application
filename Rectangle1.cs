@@ -1,5 +1,4 @@
 ﻿
-using System.Data;
 
 namespace MyAssignment
 {
@@ -7,14 +6,13 @@ namespace MyAssignment
     /// this class is an instance of shape base class.
     /// it can be used to draw rectangle shapes
     /// </summary>
-    internal class Rectangle1 : Shape
+    public class Rectangle1 : Shape
     {
 
         private int length;
         private int width;
         private Pen myPen = new Pen(Color.White,5);
         Brush brush = new SolidBrush(Color.White);
-        bool fill = true;
 
         /// <summary>
         /// empty constructor
@@ -82,13 +80,5 @@ namespace MyAssignment
                 graphics.DrawRectangle(myPen, XPosition, YPosition, Width, Length);
             }
         }
-
-        
-        //rectangle method that calls draw, takes in command and parameters
-
-       
-
-
-
     }
 }

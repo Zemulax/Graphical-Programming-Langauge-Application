@@ -1,5 +1,4 @@
 ﻿
-using DocumentFormat.OpenXml.Drawing.ChartDrawing;
 
 namespace MyAssignment
 {
@@ -9,11 +8,12 @@ namespace MyAssignment
     /// </summary>
     public class Circle : Shape
     {
-
+        
         int radius;
-        readonly int radius1;
         private readonly Pen myPen = new (Color.White, 5);
         readonly Brush brush = new SolidBrush(Color.Magenta);
+
+       
 
         /// <summary>
         /// empty constructor
@@ -28,10 +28,10 @@ namespace MyAssignment
         /// <param name="xPos">the x axis where the rectangle will be drawn</param>
         /// <param name="yPos">the y axis where the rectangle will be drawn</param>
        
-        public Circle(int xPos, int yPos, int radius, int radius1) : base(xPos, yPos)
+        public Circle(Point point, int radius): base(point)
         {
+
             this.radius = radius;
-            this.radius1 = radius1;
         }
 
         /// <summary>
@@ -45,6 +45,7 @@ namespace MyAssignment
             set { radius = value; }
         }
 
+        
         /// <summary>
         /// draw method for circle class
         /// this method draws the rectangle with specified parameters
@@ -54,12 +55,12 @@ namespace MyAssignment
         {
             if (fill == true)
             {
-                graphics.DrawEllipse(myPen, new Rectangle(XPosition, YPosition, radius, radius1));
-                graphics.FillEllipse(brush, new Rectangle(XPosition, YPosition, radius, radius1));
+                graphics.DrawEllipse(myPen, ShapePoint.X,ShapePoint.Y,radius,radius);
+                graphics.FillEllipse(brush, ShapePoint.X, ShapePoint.Y, radius, radius);
             }
             else
             {
-                graphics.DrawEllipse(myPen, new Rectangle(XPosition, YPosition, radius, radius1));
+                graphics.DrawEllipse(myPen, ShapePoint.X, ShapePoint.Y, radius, radius);
             }
         }
 

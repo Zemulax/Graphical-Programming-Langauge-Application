@@ -6,7 +6,7 @@ namespace MyAssignment
     /// this class is an instance of shape base class.
     /// it can be used to draw rectangle shapes
     /// </summary>
-    public class Rectangle1 : Shape
+    public class Rectangle : Shape
     {
 
         private int length;
@@ -17,7 +17,7 @@ namespace MyAssignment
         /// <summary>
         /// empty constructor
         /// </summary>
-        Rectangle1()
+        Rectangle()
         {
 
         }
@@ -28,7 +28,7 @@ namespace MyAssignment
         /// <param name="yPos">the y axis where the rectangle will be drawn</param>
         /// <param name="width">width of the rectangle to be drawn</param>
         /// <param name="length">length of the rectangle to be drawn</param>
-        public Rectangle1(int xPos, int yPos, int width, int length) : base(xPos, yPos)
+        public Rectangle(Point point, int width, int length): base(point)
         {
             this.width = width;
             this.length = length;
@@ -68,16 +68,16 @@ namespace MyAssignment
         /// this method draws the rectangle with specified parameters
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
-        public override void DrawShape(Graphics graphics, bool fill)
+        public  override void DrawShape(Graphics graphics, bool fill)
         {
             if(fill == true)
             {
-                graphics.DrawRectangle(myPen, XPosition, YPosition, Width, Length);
-                graphics.FillRectangle(brush, XPosition, YPosition, Width,Length);
+                graphics.DrawRectangle(myPen, ShapePoint.X,ShapePoint.Y, Width, Length);
+                graphics.FillRectangle(brush, ShapePoint.X, ShapePoint.Y, Width,Length);
             }
             else
             {
-                graphics.DrawRectangle(myPen, XPosition, YPosition, Width, Length);
+                graphics.DrawRectangle(myPen, ShapePoint.X, ShapePoint.Y, Width, Length);
             }
         }
     }

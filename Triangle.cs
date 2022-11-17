@@ -8,7 +8,7 @@ namespace MyAssignment
     {
         Pen pen = new (Color.White);
 
-        public Triangle(int xCordinate, int ycordinate) : base(xCordinate, ycordinate)
+        public Triangle(int xCordinate, int ycordinate)
         {
             MessageBox.Show("Triangle is predefined!");
         }

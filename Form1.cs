@@ -1,5 +1,7 @@
 
 
+using Microsoft.VisualBasic;
+
 namespace MyAssignment
 {
     /// <summary>
@@ -8,17 +10,21 @@ namespace MyAssignment
     /// </summary>
     public partial class Form1 : Form
     {
-        
-        readonly DrawService MyDraw = new();
 
+        readonly DrawService MyDraw = new();
+        CommandParser commandParser = new();
         /// <summary>
         ///  constructor for form class
         /// </summary>
         public Form1()
         {
+            
             InitializeComponent();
             MyDraw = new DrawService(Graphics.FromImage(MyDraw.DisplayBitmap));
+            InputField.Focus();
+            // commandParser= new(commandParser.ShapePoint, Graphics.FromImage(commandParser.DisplayBitmap), CommandLine.Lines, Fill.Text.ToLower());
 
+            //pass commandparser here
         }
 
         /// <summary>
@@ -39,7 +45,9 @@ namespace MyAssignment
         private void MainDisplay_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, MyDraw.XPos, MyDraw.YPos);
+            graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, 0,0);
+            //MyDraw.Dispose();
+            
         }
 
         /// <summary>
@@ -49,17 +57,18 @@ namespace MyAssignment
         /// <param name="e"></param>
         private void Enter_Click(object sender, EventArgs e)
         {
+            
             if (InputField.Text == "run" || InputField.Text == "")
             {
-                CommandParser commandParser = new(Graphics.FromImage(MyDraw.DisplayBitmap), CommandLine.Lines, Fill.Text.ToLower());
+               commandParser = new(commandParser.ShapePoint,Graphics.FromImage(MyDraw.DisplayBitmap),CommandLine.Lines);
                 
             }
 
             else
             {
-               CommandParser commandParser = new(Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines, Fill.Text.ToLower());
+               commandParser = new(commandParser.ShapePoint,Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines);
             }
-
+            
             InputField.Clear();
             Refresh();
         }
@@ -67,8 +76,8 @@ namespace MyAssignment
         private void Clear_Click(object sender, EventArgs e)
         {
             
-            Graphics graphics = Graphics.FromImage(MyDraw.DisplayBitmap);
-            graphics.Clear(Color.MidnightBlue);
+           Graphics graphics = Graphics.FromImage(MyDraw.DisplayBitmap);
+           graphics.Clear(Color.MidnightBlue);
            
             Refresh();
         }
@@ -96,6 +105,11 @@ namespace MyAssignment
         {
             Fill.Text = "Fill Off";
             Fill.BackColor = Color.Magenta;
+        }
+
+        private void InfoTextBox_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

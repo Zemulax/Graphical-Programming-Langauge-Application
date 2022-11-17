@@ -49,7 +49,7 @@ namespace MyAssignment
             saveFileDialog.ShowDialog();
             if (saveFileDialog.FileName != "")
             {
-                string myProgramName = saveFileDialog.FileName;
+                string myProgramName = saveFileDialog.FileName;     ///writing to the pg
                 TextWriter writer = new StreamWriter(myProgramName);
                 writer.WriteLine(file);
                 MessageBox.Show("Program has been saved!");

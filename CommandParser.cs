@@ -1,92 +1,130 @@
 ﻿
-
 namespace MyAssignment
 {
     /// <summary>
     /// this class parses and executes all commands
     /// </summary>
-    public class CommandParser  : DrawService
+    public class CommandParser  : Shape
     {
-        readonly DrawService? drawService;
-        readonly Rectangle1? rect = null;
-        readonly int[] cordinates = new int[3];
-        private string? command = null;
+        // readonly DrawService? drawService;
 
+        private readonly string errorMessages = "";
+
+        private readonly Graphics graphics;
+        readonly Bitmap displayBitmap = new(800, 400);
+        readonly int[] cordinates = new int[3];
+        private string command = "";
+
+        
+        Point points = new()
+        {
+            X =0,
+            Y =0
+
+        };
         private readonly bool fill;
+        
+        public CommandParser() { }
+
         
         /// <summary>
         /// commandParser constructor 
         /// </summary>
         /// <param name="graphics">surface where the drawing will happen</param>
         /// <param name="commands">an array of commands to be parsed</param>
-        public CommandParser(Graphics g,string[] commands, string fillers)  : base(g)
+        public CommandParser(Point points,Graphics g,string[] commands)  : base(points)
         {
-            drawService = new DrawService(Graphic);
-            if (fillers.Equals("fill on")){
-                fill = true;
-            }
-            
-           // drawService = new DrawService(Graphic,xposition,yposition);
+            this.points = points;
+            this.graphics = g;
+            DrawService drawService = new(graphics);
+
+            // drawService = new DrawService(Graphic,xposition,yposition);
             for (int i = 0; i < commands.Length; i++)
             {
                try
                   {
                      string[] separators = { " ", "," };
                      IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
-                     string firstCommand = values.First();
-                     int parameter1 = int.Parse(values.Skip(1).First());
-                     int parameter2 = int.Parse(values.Last());
+                     string firstCommand = values.First().ToLower();
 
 
-                    cordinates[0] = parameter1;
-                    cordinates[1] = parameter2;
-
-                    switch (firstCommand.ToLower()) //uniform all input
-                    {
-                        case "moveto":
-                            drawService.MoveTo(parameter1, parameter2);
-                            break;
-
-                        case "triangle":
-                            Triangle triangle = new(XPos, YPos);
-                            drawService.DrawTo(200, 50);
-                            drawService.DrawTo(100, 200);
-                            drawService.DrawTo(50, 50);
-
-
-
-                            break;
-                        case "drawto":
-                            drawService.DrawTo(parameter1, parameter2);
-                            break;
-
-                        case "rectangle":
-                            rect = new Rectangle1(XPos,YPos, parameter1, parameter2);
-                            rect.DrawShape(Graphic,fill);
-                            break;
-
-                        case "circle":
-                            Circle circle = new (XPos, YPos, parameter1, parameter2);
-                            circle.DrawShape(Graphic,fill);
-                            break;
-                       
-
-                        default:
-                            MessageBox.Show("Unrecognised command at line "+ i);
-                            break;
+                    if (firstCommand.Equals("fill")){
+                        fill = true;
+                        continue;
                     }
+
+                    else if(firstCommand.Equals("unfill")){
+                        fill = false;
+                        continue;
+                    }
+
+                    else
+                    {
+                        int parameter1 = int.Parse(values.Skip(1).First());
+                        int parameter2 = int.Parse(values.Last());
+
+
+
+                        cordinates[0] = parameter1;
+                        cordinates[1] = parameter2;
+
+                        Point generalUsePoints = new()
+                        {
+                            X = parameter1,
+                            Y = parameter2
+
+                        };
+
+                        Cursor cursor = new(ShapePoint, parameter1, parameter2);
+                        DrawTo drawto = new(ShapePoint, generalUsePoints);
+                        Rectangle rectangle1 = new(ShapePoint, parameter1, parameter2);
+                        Circle circle = new (ShapePoint, parameter1);
+
+                        switch (firstCommand) //uniform all input
+                        {
+
+                            case "rectangle":
+                                rectangle1.DrawShape(graphics, fill);
+                                break;
+
+                            case "circle":
+                                circle.DrawShape(graphics, fill);
+                                break;
+
+                            case "moveto":
+                                points.X = parameter1;
+                                points.Y = parameter2;
+                                ShapePoint = points;
+                               // cursor.DrawShape(drawService.Graphic, fill);
+                                break;
+
+                            case "drawto":
+                                drawto.DrawShape(graphics, fill);
+                                break;
+
+                            default:
+                                drawService.Dr();
+                                MessageBox.Show("Unrecognised command at line " + i);
+                                break;
+                        }
+                    }
+                     
+
                 }
 
                 catch (FormatException)
                     {
-                        MessageBox.Show("You might have entered an incorrect parameter at " + i);
+                        errorMessages =  "You might have entered an incorrect parameter at line " + i;
+                        
                     }
                     catch (InvalidOperationException)
                     {
-                        MessageBox.Show("You might have forgotten a Parameter at line " + i);
-                    }   
-             }
+                    errorMessages = "You might have entered an incorrect parameter at line " + i;
+                }   
+             
+            }
         }
+
 
 
         /// <summary>
@@ -95,7 +133,7 @@ namespace MyAssignment
         public string Command
         {
             set { command = value; }
-            get { return command; }
+            //get { return command; }
         }
 
         /// <summary>
@@ -105,5 +143,28 @@ namespace MyAssignment
         {
             get { return cordinates; }
         }
+
+        public override void DrawShape(Graphics graphics, bool fill)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Bitmap DisplayBitmap
+        {
+            get { return displayBitmap; }
+        }
+
+        public bool Fill
+        {
+            get { return fill; }
+            
+        }
+        public Point Points
+        {
+            set { points = value; }
+            get { return points; }
+
+        }
+        public String ErrorMessage { get { return errorMessages; } }
     }
 }

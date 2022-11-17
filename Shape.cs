@@ -6,8 +6,7 @@ namespace MyAssignment
     /// </summary>
     public abstract class Shape : ShapesInterface
     {
-        private int xPosition = 200;
-        private int yPosition = 200;
+        private Point mypoint;
         
         /// <summary>
         /// empty constructor
@@ -19,29 +18,19 @@ namespace MyAssignment
         /// </summary>
         /// <param name="xposition">x axis</param>
         /// <param name="yposition">y axis</param>
-        public Shape(int xposition, int yposition)
+        public Shape(Point point)
         {
-            this.xPosition = xposition;
-            this.yPosition = yposition; 
+            mypoint = point;
+            //MessageBox.Show("" + mypoint);
+            
         }
 
-        /// <summary>
-        /// sets and gets the x axis for an object
-        /// </summary>
-       public int XPosition
+
+        public Point ShapePoint
         {
-            get { return xPosition; }
-            set { xPosition = value; }
-        }
-
-        /// <summary>
-        /// sets and gets the y axis for an object
-        /// </summary>
-        public int YPosition { 
-   
-            set { yPosition = value; }
-            get { return yPosition; }
-
+            set { mypoint = value; }
+            get { return mypoint; }
+            
         }
 
        /// <summary>
@@ -50,4 +39,5 @@ namespace MyAssignment
        /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
         public abstract void DrawShape(Graphics graphics, bool fill);
     }
+    
 }

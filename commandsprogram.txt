@@ -1,0 +1,28 @@
+fill
+moveto 50,50
+rectangle 60,60
+moveto 120,50
+rectangle 60,60
+moveto 120,120
+unfill
+rectangle 60,60
+moveto 50,120
+fill
+rectangle 60,60
+
+moveto 200,50
+circle 60
+moveto 270,50
+circle 60
+moveto 270,120
+unfill
+circle 60
+moveto 200,120
+fill
+circle 60,60
+
+moveto 50 200
+drawto 330 200
+
+
+

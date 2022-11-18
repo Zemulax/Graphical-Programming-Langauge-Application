@@ -3,12 +3,10 @@
 namespace MyAssignment
 {
     /// <summary>
-    /// this class is an instance of shape base class.
-    /// it can be used to draw rectangle shapes
+    /// circle class used to draw circular objects
     /// </summary>
     public class Circle : Shape
     {
-        
         int radius;
         private readonly Pen myPen = new (Color.White, 5);
         readonly Brush brush = new SolidBrush(Color.Magenta);
@@ -20,14 +18,13 @@ namespace MyAssignment
         /// </summary>
         Circle()
         {
-
         }
-        /// <summary>
-        /// constructor for rectangle shapes
-        /// </summary>
-        /// <param name="xPos">the x axis where the rectangle will be drawn</param>
-        /// <param name="yPos">the y axis where the rectangle will be drawn</param>
-       
+        
+       /// <summary>
+       /// class constructor
+       /// </summary>
+       /// <param name="point">x and y axis where the object will be drawn</param>
+       /// <param name="radius">radius of the circle to be drawn</param>
         public Circle(Point point, int radius): base(point)
         {
 
@@ -51,26 +48,17 @@ namespace MyAssignment
         /// this method draws the rectangle with specified parameters
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
+        /// <param name="fill">determines whether the circle should be colored or outlined</param>
         public override void DrawShape(Graphics graphics,bool fill)
         {
-            if (fill == true)
-            {
-                graphics.DrawEllipse(myPen, ShapePoint.X,ShapePoint.Y,radius,radius);
-                graphics.FillEllipse(brush, ShapePoint.X, ShapePoint.Y, radius, radius);
-            }
-            else
-            {
-                graphics.DrawEllipse(myPen, ShapePoint.X, ShapePoint.Y, radius, radius);
-            }
+                if (fill == true)
+                {
+                    graphics.FillEllipse(brush, ShapePoint.X, ShapePoint.Y, radius, radius);
+                }
+                else
+                {
+                    graphics.DrawEllipse(myPen, ShapePoint.X, ShapePoint.Y, radius, radius);
+                }
         }
-
-
-        
-        //rectangle method that calls draw, takes in command and parameters
-
-
-
-
-
     }
 }

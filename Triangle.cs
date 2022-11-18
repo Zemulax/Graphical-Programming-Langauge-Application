@@ -2,19 +2,30 @@
 namespace MyAssignment
 {
     /// <summary>
-    /// this is a predefined triangle class
+    /// this is a triangle class used to draw predefined triangular objects
     /// </summary>
     public class Triangle : Shape
     {
-        Pen pen = new (Color.White);
+        readonly Pen pen = new (Color.White,5);
 
-        public Triangle(int xCordinate, int ycordinate)
+        /// <summary>
+        /// triangle constructor
+        /// </summary>
+        /// <param name="points"></param>
+        public Triangle(Point points) : base(points)
         {
-            MessageBox.Show("Triangle is predefined!");
         }
+
+        /// <summary>
+        /// draw method for triangle class
+        /// </summary>
+        /// <param name="graphics">surface to be drawn on</param>
+        /// <param name="fill">whether the shape shoulf be colored or outlined</param>
         public override void DrawShape(Graphics graphics, bool fill)
         {
-           throw new NotImplementedException();
+            graphics.DrawLine(pen, 180, 200, 50, 320);
+            graphics.DrawLine(pen, 50, 320, 320, 320);
+            graphics.DrawLine(pen, 320, 320, 180, 200);
         }
     }
 }

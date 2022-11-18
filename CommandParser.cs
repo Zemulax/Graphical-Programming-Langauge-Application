@@ -1,4 +1,5 @@
 ﻿
+
 namespace MyAssignment
 {
     /// <summary>
@@ -6,43 +7,32 @@ namespace MyAssignment
     /// </summary>
     public class CommandParser  : Shape
     {
-        // readonly DrawService? drawService;
 
-        private readonly string errorMessages = "";
-
-        private readonly Graphics graphics;
-        readonly Bitmap displayBitmap = new(800, 400);
+        public List<string> errorMessages = new(); //collects exceptions
+        private readonly Graphics graphics = null;
         readonly int[] cordinates = new int[3];
-        private string command = "";
-
-        
-        Point points = new()
-        {
-            X =0,
-            Y =0
-
-        };
         private readonly bool fill;
         
-        public CommandParser() { }
 
-        
-        /// <summary>
-        /// commandParser constructor 
-        /// </summary>
-        /// <param name="graphics">surface where the drawing will happen</param>
-        /// <param name="commands">an array of commands to be parsed</param>
-        public CommandParser(Point points,Graphics g,string[] commands)  : base(points)
+        public CommandParser()
         {
-            this.points = points;
-            this.graphics = g;
-            DrawService drawService = new(graphics);
+           
+        }
 
-            // drawService = new DrawService(Graphic,xposition,yposition);
+        /// <summary>
+        /// Parsecommander class constructor interprets and executes commands using various method calls
+        /// </summary>
+        /// <param name="points">the x and y axis to set the pen to</param>
+        /// <param name="graphics">surface for drawing</param>
+        /// <param name="commands">commands that determine execution</param>
+        public CommandParser(Point points,Graphics graphics,string[] commands)  : base(points)
+        {
+            this.graphics = graphics;
+            
             for (int i = 0; i < commands.Length; i++)
             {
                try
-                  {
+               {
                      string[] separators = { " ", "," };
                      IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
                      string firstCommand = values.First().ToLower();
@@ -52,18 +42,38 @@ namespace MyAssignment
                         fill = true;
                         continue;
                     }
+                    else if (firstCommand.Equals("clear"))
+                    {
+                        graphics.Clear(Color.MidnightBlue);
+                        continue;
+                    }
 
+                    else if (firstCommand.Equals("reset"))
+                    {
+                        points.X = 0; 
+                        points.Y = 0;
+                        ShapePoint = points;
+                        continue;
+                    }
                     else if(firstCommand.Equals("unfill")){
                         fill = false;
                         continue;
                     }
+                    else if (firstCommand.Equals("reset"))
+                    {
+                        points.X = points.Y = 0;
+                    }
 
                     else
                     {
-                        int parameter1 = int.Parse(values.Skip(1).First());
+                        
+                        int parameter1 = int.Parse(values.Skip(1).First()); //skip the first value which is the "firstCommand",get the second value
                         int parameter2 = int.Parse(values.Last());
 
-
+                        if(parameter1>=515 ||parameter1<0 || parameter2 >515 || parameter2<0)
+                        {
+                            throw new ArgumentOutOfRangeException(" \nValue out of bounds. limit 515 ");
+                        }
 
                         cordinates[0] = parameter1;
                         cordinates[1] = parameter2;
@@ -75,14 +85,15 @@ namespace MyAssignment
 
                         };
 
-                        Cursor cursor = new(ShapePoint, parameter1, parameter2);
+                        //shape objects instantiation
+                        Cursor cursor = new(ShapePoint);
                         DrawTo drawto = new(ShapePoint, generalUsePoints);
                         Rectangle rectangle1 = new(ShapePoint, parameter1, parameter2);
+                        Triangle triangle = new(ShapePoint);
                         Circle circle = new (ShapePoint, parameter1);
 
                         switch (firstCommand) //uniform all input
                         {
-
                             case "rectangle":
                                 rectangle1.DrawShape(graphics, fill);
                                 break;
@@ -91,11 +102,14 @@ namespace MyAssignment
                                 circle.DrawShape(graphics, fill);
                                 break;
 
+                            case "triangle":
+                                triangle.DrawShape(graphics, fill);
+                                break;
+
                             case "moveto":
-                                points.X = parameter1;
-                                points.Y = parameter2;
-                                ShapePoint = points;
-                               // cursor.DrawShape(drawService.Graphic, fill);
+                                cursor.Points = generalUsePoints;
+                                ShapePoint = cursor.Points;
+                                cursor.DrawShape(graphics, fill);
                                 break;
 
                             case "drawto":
@@ -103,39 +117,29 @@ namespace MyAssignment
                                 break;
 
                             default:
-                                drawService.Dr();
-                                MessageBox.Show("Unrecognised command at line " + i);
+                                errorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
                         }
                     }
-                     
+               }
 
+                catch(FormatException)
+                {
+                        errorMessages.Add("Incorrect parameter at command: " + commands[i]);
                 }
 
-                catch (FormatException)
-                    {
-                        errorMessages =  "You might have entered an incorrect parameter at line " + i;
-                        
-                    }
-                    catch (InvalidOperationException)
-                    {
-                    errorMessages = "You might have entered an incorrect parameter at line " + i;
-                }   
-             
+                catch(InvalidOperationException)
+                {
+                      errorMessages.Add("Missing Parameter at command: " + commands[i]);
+                }
+
+                catch (ArgumentOutOfRangeException)
+                {
+                    errorMessages.Add("value too large");
+                }
             }
         }
-
-
-
-        /// <summary>
-        /// sets and gets the value of command
-        /// </summary>
-        public string Command
-        {
-            set { command = value; }
-            //get { return command; }
-        }
-
+        
         /// <summary>
         /// sets and gets the coordiated into the array
         /// </summary>
@@ -144,27 +148,24 @@ namespace MyAssignment
             get { return cordinates; }
         }
 
+        /// <summary>
+        /// unimplemented method
+        /// </summary>
+        /// <param name="graphics"></param>
+        /// <param name="fill"></param>
+        /// <exception cref="NotImplementedException"></exception>
         public override void DrawShape(Graphics graphics, bool fill)
         {
             throw new NotImplementedException();
         }
 
-        public Bitmap DisplayBitmap
-        {
-            get { return displayBitmap; }
-        }
-
+        /// <summary>
+        /// sets the value of fill to true or false
+        /// </summary>
         public bool Fill
         {
             get { return fill; }
             
         }
-        public Point Points
-        {
-            set { points = value; }
-            get { return points; }
-
-        }
-        public String ErrorMessage { get { return errorMessages; } }
     }
 }

@@ -35,9 +35,11 @@
             this.Clear = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.Load = new System.Windows.Forms.Button();
-            this.Fill = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Infotext = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -46,10 +48,13 @@
             // 
             this.InputField.AcceptsReturn = true;
             this.InputField.AllowDrop = true;
-            this.InputField.Location = new System.Drawing.Point(12, 547);
+            this.InputField.BackColor = System.Drawing.SystemColors.Control;
+            this.InputField.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.InputField.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.InputField.Location = new System.Drawing.Point(538, 594);
             this.InputField.Name = "InputField";
-            this.InputField.PlaceholderText = "Single Command Line";
-            this.InputField.Size = new System.Drawing.Size(316, 27);
+            this.InputField.PlaceholderText = "Single Command Line..";
+            this.InputField.Size = new System.Drawing.Size(415, 24);
             this.InputField.TabIndex = 2;
             this.InputField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputField_KeyDown);
             // 
@@ -58,9 +63,9 @@
             this.MainDisplay.BackColor = System.Drawing.Color.MidnightBlue;
             this.MainDisplay.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.MainDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.MainDisplay.Location = new System.Drawing.Point(428, 89);
+            this.MainDisplay.Location = new System.Drawing.Point(12, 68);
             this.MainDisplay.Name = "MainDisplay";
-            this.MainDisplay.Size = new System.Drawing.Size(843, 401);
+            this.MainDisplay.Size = new System.Drawing.Size(520, 520);
             this.MainDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.MainDisplay.TabIndex = 3;
             this.MainDisplay.TabStop = false;
@@ -70,9 +75,9 @@
             // CommandLine
             // 
             this.CommandLine.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandLine.Location = new System.Drawing.Point(12, 89);
+            this.CommandLine.Location = new System.Drawing.Point(538, 68);
             this.CommandLine.Name = "CommandLine";
-            this.CommandLine.Size = new System.Drawing.Size(316, 401);
+            this.CommandLine.Size = new System.Drawing.Size(271, 319);
             this.CommandLine.TabIndex = 4;
             this.CommandLine.Text = "";
             // 
@@ -81,9 +86,9 @@
             this.Enter.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Enter.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Enter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Enter.Location = new System.Drawing.Point(428, 509);
+            this.Enter.Location = new System.Drawing.Point(422, 594);
             this.Enter.Name = "Enter";
-            this.Enter.Size = new System.Drawing.Size(110, 65);
+            this.Enter.Size = new System.Drawing.Size(110, 50);
             this.Enter.TabIndex = 5;
             this.Enter.Text = "Enter";
             this.Enter.UseVisualStyleBackColor = false;
@@ -94,9 +99,9 @@
             this.Clear.BackColor = System.Drawing.Color.Red;
             this.Clear.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Clear.ForeColor = System.Drawing.SystemColors.Window;
-            this.Clear.Location = new System.Drawing.Point(1150, 507);
+            this.Clear.Location = new System.Drawing.Point(12, 594);
             this.Clear.Name = "Clear";
-            this.Clear.Size = new System.Drawing.Size(121, 65);
+            this.Clear.Size = new System.Drawing.Size(121, 50);
             this.Clear.TabIndex = 6;
             this.Clear.Text = "clear";
             this.Clear.UseVisualStyleBackColor = false;
@@ -107,9 +112,9 @@
             this.Save.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Save.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Save.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Save.Location = new System.Drawing.Point(544, 509);
+            this.Save.Location = new System.Drawing.Point(302, 594);
             this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(114, 65);
+            this.Save.Size = new System.Drawing.Size(114, 50);
             this.Save.TabIndex = 7;
             this.Save.Text = "Save";
             this.Save.UseVisualStyleBackColor = false;
@@ -120,24 +125,13 @@
             this.Load.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Load.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Load.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Load.Location = new System.Drawing.Point(984, 509);
+            this.Load.Location = new System.Drawing.Point(139, 594);
             this.Load.Name = "Load";
-            this.Load.Size = new System.Drawing.Size(151, 65);
+            this.Load.Size = new System.Drawing.Size(110, 50);
             this.Load.TabIndex = 7;
             this.Load.Text = "Load";
             this.Load.UseVisualStyleBackColor = false;
             this.Load.Click += new System.EventHandler(this.Load_Click);
-            // 
-            // Fill
-            // 
-            this.Fill.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.Fill.Font = new System.Drawing.Font("Unispace", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.Fill.ForeColor = System.Drawing.Color.MintCream;
-            this.Fill.Location = new System.Drawing.Point(664, 509);
-            this.Fill.Name = "Fill";
-            this.Fill.Size = new System.Drawing.Size(314, 65);
-            this.Fill.TabIndex = 8;
-            this.Fill.UseVisualStyleBackColor = false;
             // 
             // panel1
             // 
@@ -145,7 +139,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1259, 71);
+            this.panel1.Size = new System.Drawing.Size(941, 53);
             this.panel1.TabIndex = 9;
             // 
             // label1
@@ -153,19 +147,55 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Unispace", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(447, 12);
+            this.label1.Location = new System.Drawing.Point(317, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(332, 48);
             this.label1.TabIndex = 0;
             this.label1.Text = "SHAPE CREATOR";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.ForeColor = System.Drawing.Color.OrangeRed;
+            this.label2.Location = new System.Drawing.Point(538, 400);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "System Logs";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(815, 71);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(138, 316);
+            this.textBox1.TabIndex = 14;
+            this.textBox1.Text = "Helpful Commands\r\n\r\nRectangle\r\nCircle\r\nMoveTo\r\nDrawTo\r\nTriangle\r\nfill\r\nunfill\r\nCl" +
+    "ear\r\nReset\r\nNote : your pen is invisibe.";
+            // 
+            // Infotext
+            // 
+            this.Infotext.BulletIndent = 1;
+            this.Infotext.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.Infotext.ForeColor = System.Drawing.Color.OrangeRed;
+            this.Infotext.Location = new System.Drawing.Point(538, 423);
+            this.Infotext.Name = "Infotext";
+            this.Infotext.ReadOnly = true;
+            this.Infotext.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.Infotext.Size = new System.Drawing.Size(415, 165);
+            this.Infotext.TabIndex = 12;
+            this.Infotext.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1299, 621);
+            this.ClientSize = new System.Drawing.Size(967, 659);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.Infotext);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.Fill);
             this.Controls.Add(this.Load);
             this.Controls.Add(this.Save);
             this.Controls.Add(this.Clear);
@@ -191,8 +221,10 @@
         private Button Clear;
         private Button Save;
         private Button Load;
-        private Button Fill;
         private Panel panel1;
         private Label label1;
+        private Label label2;
+        private TextBox textBox1;
+        private RichTextBox Infotext;
     }
 }

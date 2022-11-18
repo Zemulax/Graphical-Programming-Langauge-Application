@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 namespace MyAssignment
 {
     /// <summary>
-    /// this is a class for basic functionalities in the program
+    /// this is a class for functionalities in the program
+    ///used to save and load a program file
     /// </summary>
     public class Functionalities
     {

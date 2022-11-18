@@ -7,11 +7,10 @@ namespace MyAssignment
     /// </summary>
     public class DrawService : IDisposable
     {
-        private readonly Graphics graphics;
-        readonly Bitmap displayBitmap = new(800, 400);
-        readonly Pen pen = new(Color.White, 5);
-        
+        private readonly Graphics graphics = null;
+        readonly Bitmap displayBitmap = new(840, 500);
 
+        public DrawService() { }
         /// <summary>
         /// constructor for drawing graphics
         /// </summary>
@@ -21,26 +20,28 @@ namespace MyAssignment
             this.graphics = graphics;
             
         }
-        public void Clear()
-        {
-            MessageBox.Show("clearing");
-            graphics.Clear(Color.Red);    
-        }
 
+        /// <summary>
+        /// this method disposes drawing materials utilised
+        /// </summary>
         public void Dispose()
         {
-            Graphic.Dispose();
+            GC.SuppressFinalize(this);
         }
-        public void Dr()
-        {
-            graphics.DrawRectangle(pen, 20, 20, 20, 20);
-        }
-
-        public DrawService() { }
+        
+        /// <summary>
+        /// bitmap property
+        /// returns bitmap object
+        /// </summary>
         public Bitmap DisplayBitmap
         {
             get { return displayBitmap; }
         }
+
+        /// <summary>
+        /// graphic property
+        /// returns graphic object
+        /// </summary>
         public Graphics Graphic
         {
             get { return graphics; }

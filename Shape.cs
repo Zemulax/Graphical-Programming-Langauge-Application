@@ -21,7 +21,7 @@ namespace MyAssignment
         public Shape(Point point)
         {
             mypoint = point;
-            //MessageBox.Show("" + mypoint);
+           // MessageBox.Show("" + mypoint);
             
         }
 

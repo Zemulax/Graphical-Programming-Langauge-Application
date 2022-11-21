@@ -8,7 +8,7 @@ namespace MyAssignment
     public class DrawService : IDisposable
     {
         private readonly Graphics graphics = null;
-        readonly Bitmap displayBitmap = new(840, 500);
+        readonly Bitmap displayBitmap = new(515, 515);
 
         public DrawService() { }
         /// <summary>

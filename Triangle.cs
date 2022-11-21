@@ -6,8 +6,6 @@ namespace MyAssignment
     /// </summary>
     public class Triangle : Shape
     {
-        readonly Pen pen = new (Color.White,5);
-
         /// <summary>
         /// triangle constructor
         /// </summary>
@@ -21,11 +19,12 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">surface to be drawn on</param>
         /// <param name="fill">whether the shape shoulf be colored or outlined</param>
-        public override void DrawShape(Graphics graphics, bool fill)
+        public override void DrawShape(Graphics graphics, bool fill, Pen shapePen,Brush shapeBrush)
         {
-            graphics.DrawLine(pen, 180, 200, 50, 320);
-            graphics.DrawLine(pen, 50, 320, 320, 320);
-            graphics.DrawLine(pen, 320, 320, 180, 200);
+            graphics.DrawLine(shapePen, 180, 200, 50, 320);
+            graphics.DrawLine(shapePen, 50, 320, 320, 320);
+            graphics.DrawLine(shapePen, 320, 320, 180, 200);
+            
         }
     }
 }

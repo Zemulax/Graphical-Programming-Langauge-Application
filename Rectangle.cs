@@ -10,8 +10,6 @@ namespace MyAssignment
     {
         private int length;
         private int width;
-        private Pen myPen = new Pen(Color.White,5);
-        readonly Brush brush = new SolidBrush(Color.White);
 
         /// <summary>
         /// empty constructor
@@ -60,11 +58,7 @@ namespace MyAssignment
         /// sets the pen object
         /// returns the pen object
         /// </summary>
-        public Pen MyPen
-        {
-            get { return myPen; }
-            set { myPen = value; }
-        }
+
 
         /// <summary>
         /// draw method for rectangle class
@@ -72,14 +66,14 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
         /// <param name="fill">specifies whether the object should be colored or outlined</param>
-        public  override void DrawShape(Graphics graphics, bool fill)
+        public  override void DrawShape(Graphics graphics, bool fill, Pen shapePen, Brush shapeBrush)
         {  if (fill == true)
                 {
-                    graphics.FillRectangle(brush, ShapePoint.X, ShapePoint.Y, Width, Length);
+                    graphics.FillRectangle(shapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
                 }
                 else
                 {
-                    graphics.DrawRectangle(myPen, ShapePoint.X, ShapePoint.Y, Width, Length);
+                    graphics.DrawRectangle(shapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
                 }
         }
     }

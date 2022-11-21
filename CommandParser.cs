@@ -7,12 +7,13 @@ namespace MyAssignment
     /// </summary>
     public class CommandParser  : Shape
     {
-
+        
         public List<string> errorMessages = new(); //collects exceptions
         private readonly Graphics graphics = null;
         readonly int[] cordinates = new int[3];
         private readonly bool fill;
-        
+        private Color colour = Color.White;
+
 
         public CommandParser()
         {
@@ -28,45 +29,66 @@ namespace MyAssignment
         public CommandParser(Point points,Graphics graphics,string[] commands)  : base(points)
         {
             this.graphics = graphics;
-            
+            Colours colours = new(colour);
             for (int i = 0; i < commands.Length; i++)
             {
                try
                {
-                     string[] separators = { " ", "," };
-                     IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
-                     string firstCommand = values.First().ToLower();
-
-
-                    if (firstCommand.Equals("fill")){
-                        fill = true;
-                        continue;
-                    }
-                    else if (firstCommand.Equals("clear"))
+                    switch (commands[i].ToLower())
                     {
-                        graphics.Clear(Color.MidnightBlue);
-                        continue;
-                    }
+                        case "pen red":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Red,5);
+                            colours.ShapeBrush = new SolidBrush(Color.Red);
+                            continue;
 
-                    else if (firstCommand.Equals("reset"))
-                    {
-                        points.X = 0; 
-                        points.Y = 0;
-                        ShapePoint = points;
-                        continue;
-                    }
-                    else if(firstCommand.Equals("unfill")){
-                        fill = false;
-                        continue;
-                    }
-                    else if (firstCommand.Equals("reset"))
-                    {
-                        points.X = points.Y = 0;
-                    }
+                        case "pen green":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Green,5);
+                            colours.ShapeBrush = new SolidBrush(Color.Green);
+                            continue;
 
-                    else
-                    {
-                        
+                        case "pen magenta":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Magenta, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Magenta);
+                            continue;
+
+                        case "pen yellow":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Yellow, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Yellow);
+                            continue;
+
+                        case "default":
+                            colour = Color.White;
+                            colours.ShapePen = new(Color.White, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.White);
+                            continue;
+
+                        case "fill on":
+                            fill = true;
+                            continue;
+
+                        case "fill off":
+                            fill = false;
+                            continue;
+
+                        case "clear":
+                            graphics.Clear(Color.MidnightBlue);
+                            continue;
+            
+                        case "reset":
+                            points.X = 0;
+                            points.Y = 0;
+                            ShapePoint = points;
+                            continue;
+                    }
+                  
+                        string[] separators = { " ", "," };
+                        IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
+                        string firstCommand = values.First().ToLower();
+
                         int parameter1 = int.Parse(values.Skip(1).First()); //skip the first value which is the "firstCommand",get the second value
                         int parameter2 = int.Parse(values.Last());
 
@@ -92,35 +114,35 @@ namespace MyAssignment
                         Triangle triangle = new(ShapePoint);
                         Circle circle = new (ShapePoint, parameter1);
 
-                        switch (firstCommand) //uniform all input
+                        switch (firstCommand.ToLower()) //uniform all input
                         {
                             case "rectangle":
-                                rectangle1.DrawShape(graphics, fill);
+                                rectangle1.DrawShape(graphics, fill, colours.ShapePen,colours.ShapeBrush);
                                 break;
 
                             case "circle":
-                                circle.DrawShape(graphics, fill);
+                                circle.DrawShape(graphics, fill,colours.ShapePen,colours.ShapeBrush);
                                 break;
 
                             case "triangle":
-                                triangle.DrawShape(graphics, fill);
+                                triangle.DrawShape(graphics, fill,colours.ShapePen, colours.ShapeBrush);
                                 break;
 
                             case "moveto":
+                                
                                 cursor.Points = generalUsePoints;
                                 ShapePoint = cursor.Points;
-                                cursor.DrawShape(graphics, fill);
                                 break;
 
                             case "drawto":
-                                drawto.DrawShape(graphics, fill);
+                                drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
                                 break;
 
                             default:
                                 errorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
                         }
-                    }
+                    
                }
 
                 catch(FormatException)
@@ -154,7 +176,7 @@ namespace MyAssignment
         /// <param name="graphics"></param>
         /// <param name="fill"></param>
         /// <exception cref="NotImplementedException"></exception>
-        public override void DrawShape(Graphics graphics, bool fill)
+        public override void DrawShape(Graphics graphics, bool fill,Pen shapePen,Brush shapeBrush)
         {
             throw new NotImplementedException();
         }
@@ -166,6 +188,11 @@ namespace MyAssignment
         {
             get { return fill; }
             
+        }
+        public Color Colour
+        {
+            get { return colour; }
+            set { this.colour = value; }
         }
     }
 }

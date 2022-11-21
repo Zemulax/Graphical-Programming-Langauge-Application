@@ -38,7 +38,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.Infotext = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).BeginInit();
             this.panel1.SuspendLayout();
@@ -77,7 +76,7 @@
             this.CommandLine.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.CommandLine.Location = new System.Drawing.Point(538, 68);
             this.CommandLine.Name = "CommandLine";
-            this.CommandLine.Size = new System.Drawing.Size(271, 319);
+            this.CommandLine.Size = new System.Drawing.Size(415, 319);
             this.CommandLine.TabIndex = 4;
             this.CommandLine.Text = "";
             // 
@@ -164,16 +163,6 @@
             this.label2.TabIndex = 13;
             this.label2.Text = "System Logs";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(815, 71);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(138, 316);
-            this.textBox1.TabIndex = 14;
-            this.textBox1.Text = "Helpful Commands\r\n\r\nRectangle\r\nCircle\r\nMoveTo\r\nDrawTo\r\nTriangle\r\nfill\r\nunfill\r\nCl" +
-    "ear\r\nReset\r\nNote : your pen is invisibe.";
-            // 
             // Infotext
             // 
             this.Infotext.BulletIndent = 1;
@@ -192,7 +181,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(967, 659);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Infotext);
             this.Controls.Add(this.panel1);
@@ -224,7 +212,6 @@
         private Panel panel1;
         private Label label1;
         private Label label2;
-        private TextBox textBox1;
         private RichTextBox Infotext;
     }
 }

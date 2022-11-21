@@ -22,7 +22,8 @@ namespace MyAssignment
         private void MainDisplay_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
-            graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, cursor.Points);
+            graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, cursor.ShapePoint);
+          
             
         }
 

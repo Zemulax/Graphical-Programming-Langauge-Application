@@ -17,11 +17,7 @@ namespace MyAssignment
             Y = 0
 
         };
-
          
-         readonly Pen pen = new(Color.White,5);
-         readonly private int width;
-         readonly private int height;
 
         /// <summary>
         /// empty constructor
@@ -35,10 +31,7 @@ namespace MyAssignment
         /// <param name="point">points to update the cursor</param>
         public Cursor(Point point) : base(point)
         {
-            this.width = 0;
-            this.height = 0;
-
-
+            points = ShapePoint;
         }
 
         /// <summary>
@@ -46,9 +39,10 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphic">surface to draw the cursor on</param>
         /// <param name="fill">determines whether the cursor should be outlined or colored</param>
-        public override void DrawShape(Graphics graphic,bool fill)
+        public override void DrawShape(Graphics graphic,bool fill,Pen shapePen, Brush shapeBrush)
         {
-            graphic.DrawRectangle(pen, points.X, points.Y, 0, 0);
+            graphic.DrawRectangle(shapePen, ShapePoint.X, ShapePoint.Y, 5, 5);
+
         }
 
         /// <summary>

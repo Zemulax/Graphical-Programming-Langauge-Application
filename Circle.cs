@@ -8,10 +8,7 @@ namespace MyAssignment
     public class Circle : Shape
     {
         int radius;
-        private readonly Pen myPen = new (Color.White, 5);
-        readonly Brush brush = new SolidBrush(Color.Magenta);
 
-       
 
         /// <summary>
         /// empty constructor
@@ -49,15 +46,16 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
         /// <param name="fill">determines whether the circle should be colored or outlined</param>
-        public override void DrawShape(Graphics graphics,bool fill)
+        public override void DrawShape(Graphics graphics,bool fill, Pen shapePen, Brush shapeBrush)
         {
+           // shapePen = new(Color.White);
                 if (fill == true)
                 {
-                    graphics.FillEllipse(brush, ShapePoint.X, ShapePoint.Y, radius, radius);
+                    graphics.FillEllipse(shapeBrush, ShapePoint.X, ShapePoint.Y, radius, radius);
                 }
                 else
                 {
-                    graphics.DrawEllipse(myPen, ShapePoint.X, ShapePoint.Y, radius, radius);
+                    graphics.DrawEllipse(shapePen, ShapePoint.X, ShapePoint.Y, radius, radius);
                 }
         }
     }

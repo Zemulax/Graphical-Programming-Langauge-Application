@@ -37,7 +37,7 @@ namespace MyAssignment
        /// Every object of shape must have this method
        /// </summary>
        /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
-        public abstract void DrawShape(Graphics graphics, bool fill);
+        public abstract void DrawShape(Graphics graphics, bool fill, Pen shapePen, Brush shapeBrush);
     }
     
 }

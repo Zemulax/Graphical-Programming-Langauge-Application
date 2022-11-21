@@ -1,28 +1,30 @@
-fill
+fill on
+pen red
 moveto 50,50
 rectangle 60,60
 moveto 120,50
 rectangle 60,60
 moveto 120,120
-unfill
+fill off
 rectangle 60,60
 moveto 50,120
-fill
+fill on
 rectangle 60,60
-
+pen magenta
 moveto 200,50
 circle 60
 moveto 270,50
 circle 60
 moveto 270,120
-unfill
+fill off
 circle 60
 moveto 200,120
-fill
+fill on
+pen yellow
 circle 60,60
-
 moveto 50 200
 drawto 330 200
+
 
 
 

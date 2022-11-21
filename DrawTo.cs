@@ -12,7 +12,6 @@ namespace MyAssignment
     /// </summary>
     public class DrawTo : Shape
     {
-       private readonly Pen drawTopen = new(Color.White,5);
        private readonly Point points = new()
         {
             X = 0,
@@ -35,9 +34,9 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">surface to draw the line</param>
         /// <param name="fill">not needed here</param>
-        public override void DrawShape(Graphics graphics, bool fill)
+        public override void DrawShape(Graphics graphics, bool fill,Pen shapePen, Brush shapeBrush)
         {
-                graphics.DrawLine(drawTopen, ShapePoint, points);
+                graphics.DrawLine(shapePen, ShapePoint, points);
         }
 
     }

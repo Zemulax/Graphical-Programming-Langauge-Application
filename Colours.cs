@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
 namespace MyAssignment
 {
@@ -27,11 +23,20 @@ namespace MyAssignment
 
         public Colours() {}
 
+        /// <summary>
+        /// brush property
+        /// gets and returns brush
+        /// </summary>
         public Brush ShapeBrush
         {
             get { return shapeBrush; }
             set { shapeBrush = value; }
         }
+
+        /// <summary>
+        /// pen property 
+        /// gets and returns pen
+        /// </summary>
         public Pen ShapePen
         {
             get { return shapePen; }

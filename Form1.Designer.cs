@@ -30,7 +30,6 @@
         {
             this.InputField = new System.Windows.Forms.TextBox();
             this.MainDisplay = new System.Windows.Forms.PictureBox();
-            this.CommandLine = new System.Windows.Forms.RichTextBox();
             this.Enter = new System.Windows.Forms.Button();
             this.Clear = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
@@ -39,6 +38,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.Infotext = new System.Windows.Forms.RichTextBox();
+            this.CommandLine = new System.Windows.Forms.RichTextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -50,12 +51,11 @@
             this.InputField.BackColor = System.Drawing.SystemColors.Control;
             this.InputField.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.InputField.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.InputField.Location = new System.Drawing.Point(538, 594);
+            this.InputField.Location = new System.Drawing.Point(540, 594);
             this.InputField.Name = "InputField";
-            this.InputField.PlaceholderText = "Single Command Line..";
+            this.InputField.PlaceholderText = "Single Command Line...";
             this.InputField.Size = new System.Drawing.Size(415, 24);
             this.InputField.TabIndex = 2;
-            this.InputField.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputField_KeyDown);
             // 
             // MainDisplay
             // 
@@ -70,15 +70,6 @@
             this.MainDisplay.TabStop = false;
             this.MainDisplay.WaitOnLoad = true;
             this.MainDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.MainDisplay_Paint);
-            // 
-            // CommandLine
-            // 
-            this.CommandLine.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandLine.Location = new System.Drawing.Point(538, 68);
-            this.CommandLine.Name = "CommandLine";
-            this.CommandLine.Size = new System.Drawing.Size(415, 319);
-            this.CommandLine.TabIndex = 4;
-            this.CommandLine.Text = "";
             // 
             // Enter
             // 
@@ -155,11 +146,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Lucida Console", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.OrangeRed;
             this.label2.Location = new System.Drawing.Point(538, 400);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(141, 20);
+            this.label2.Size = new System.Drawing.Size(142, 24);
             this.label2.TabIndex = 13;
             this.label2.Text = "System Logs";
             // 
@@ -176,11 +167,34 @@
             this.Infotext.TabIndex = 12;
             this.Infotext.Text = "";
             // 
+            // CommandLine
+            // 
+            this.CommandLine.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.CommandLine.Location = new System.Drawing.Point(538, 99);
+            this.CommandLine.Name = "CommandLine";
+            this.CommandLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.CommandLine.Size = new System.Drawing.Size(415, 283);
+            this.CommandLine.TabIndex = 14;
+            this.CommandLine.Text = "";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Unispace", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label3.Location = new System.Drawing.Point(536, 76);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(189, 20);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "Multi Command LIne";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 659);
+            this.ClientSize = new System.Drawing.Size(967, 648);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.CommandLine);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Infotext);
             this.Controls.Add(this.panel1);
@@ -188,7 +202,6 @@
             this.Controls.Add(this.Save);
             this.Controls.Add(this.Clear);
             this.Controls.Add(this.Enter);
-            this.Controls.Add(this.CommandLine);
             this.Controls.Add(this.MainDisplay);
             this.Controls.Add(this.InputField);
             this.Name = "Form1";
@@ -204,7 +217,6 @@
         #endregion
         private TextBox InputField;
         private PictureBox MainDisplay;
-        private RichTextBox CommandLine;
         private Button Enter;
         private Button Clear;
         private Button Save;
@@ -213,5 +225,7 @@
         private Label label1;
         private Label label2;
         private RichTextBox Infotext;
+        private RichTextBox CommandLine;
+        private Label label3;
     }
 }

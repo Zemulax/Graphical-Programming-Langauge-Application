@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace MyAssignment
 {
     /// <summary>
     /// a class that allows use of variables
+    /// as parameters and in loops
     /// </summary>
     public class Variables
     {
@@ -54,5 +50,14 @@ namespace MyAssignment
     }
 
 
-    
+        /// <summary>
+        /// paramValues property
+        /// allows access to a storage of parameters
+        /// </summary>
+        public List<int> ParamValues
+        {
+            get { return paramValues; }
+        }
+        
+    }
 }

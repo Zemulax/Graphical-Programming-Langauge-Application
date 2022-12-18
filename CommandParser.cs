@@ -7,7 +7,6 @@ namespace MyAssignment
     /// </summary>
     public class CommandParser  : Shape
     {
-        
         public List<string> errorMessages = new(); //collects exceptions
         private readonly Graphics graphics = null;
         readonly int[] cordinates = new int[3];
@@ -16,10 +15,11 @@ namespace MyAssignment
         readonly Dictionary<string, int> collectVariables = new();
         readonly Variables variables= new();
 
-
+        /// <summary>
+        /// empty commandparser constructor
+        /// </summary>
         public CommandParser()
-        {
-           
+        { 
         }
 
         /// <summary>
@@ -46,6 +46,7 @@ namespace MyAssignment
                     //checks commands that donot draw
                     switch (commands[i].ToLower())
                     {
+                       
                         case "pen red":
                             colour = Color.Red;
                             colours.ShapePen = new(Color.Red, 5);
@@ -69,6 +70,8 @@ namespace MyAssignment
                             colours.ShapePen = new(Color.Yellow, 5);
                             colours.ShapeBrush = new SolidBrush(Color.Yellow);
                             continue;
+
+                        
 
                         case "default":
                             colour = Color.White;
@@ -268,7 +271,7 @@ namespace MyAssignment
 
                 catch (ArgumentOutOfRangeException)
                 {
-                    errorMessages.Add("value too large");
+                    errorMessages.Add("The input parameter is too large!");
                 }
             }
         }

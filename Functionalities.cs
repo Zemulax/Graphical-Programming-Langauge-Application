@@ -34,6 +34,7 @@ namespace MyAssignment
             {
                 StreamReader reader = new(openFileDialog.FileName);
                 file = reader.ReadToEnd();
+                Form1.ErrorMessages.Add("File added Successfully");
                 reader.Close();
             }
             return file;
@@ -53,7 +54,7 @@ namespace MyAssignment
                 string myProgramName = saveFileDialog.FileName;     ///writing to the pg
                 TextWriter writer = new StreamWriter(myProgramName);
                 writer.WriteLine(file);
-                MessageBox.Show("Program has been saved!");
+                Form1.ErrorMessages.Add("File added Successfully");
                 writer.Close();
             }
             return file;

@@ -1,19 +1,19 @@
-﻿
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// this class parses and executes all commands
     /// </summary>
     public class CommandParser  : Shape
     {
-        public List<string> errorMessages = new(); //collects exceptions
+       
         private readonly Graphics graphics = null;
         readonly int[] cordinates = new int[3];
         private readonly bool fill;
         private Color colour = Color.White;
         readonly Dictionary<string, int> collectVariables = new();
         readonly Variables variables= new();
+        List<string> collectIfStatements = new();
+        
 
         /// <summary>
         /// empty commandparser constructor
@@ -37,7 +37,6 @@ namespace MyAssignment
 
             //used where points are required
             Point generalUsePoints = new();
-
             //all command execution happens in here
             for (int i = 0; i < commands.Length; i++)
             {
@@ -98,10 +97,48 @@ namespace MyAssignment
                             continue;
                     }
 
+                    //if statements
+                    if (commands[i].StartsWith("if"))
+                    {
+                        
+                        Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
+                        collectIfStatements.Add(commands[i]);
+                        i++;
+                        if (commands[i].Contains(" "))
+                        {
+                            collectIfStatements.Add(commands[i]);
+                            i++;
+                            
+                            if (commands[i].Contains(" "))
+                            {
+                                collectIfStatements.Add(commands[i]);
+                                i++;
+                                if (commands[i].Contains("endif"))
+                                {
+                                    collectIfStatements.Add(commands[i]);   
+                                }
+                                else
+                                {
+                                    Form1.ErrorMessages.Add("if statement not ended correctly");
+                                }
+                            }
+                            else
+                            {
+                                Form1.ErrorMessages.Add("incorrect indentation was detected");
+                            }
+
+                        }
+                        else
+                        {
+                            Form1.ErrorMessages.Add("incorrect indentation was detected");
+                        }
+                        IfStatements ifStatements = new(collectIfStatements,graphics);
+                        continue;
+                    }
                     //this block checks if a command is a 
                     //variable declaration
                     //if yes, store it in a dictionary
-                    if (commands[i].Contains('='))
+                    else if (commands[i].Contains('='))
                     {
                         try
                         {
@@ -116,13 +153,13 @@ namespace MyAssignment
                             }
                             else
                             {
-                                errorMessages.Add("Please Declare 2 variables");
+                                Form1.ErrorMessages.Add("Please Declare 2 variables");
                                 break;
                                 
                             }
                             variables.VariableProcessor(collectVariables);
                         }
-                        catch (Exception) { errorMessages.Add("Bad variable declaration"); break; }
+                        catch (Exception) { Form1.ErrorMessages.Add("Variables have already been declared"); break; }
                         
                         continue;
                     }
@@ -194,9 +231,9 @@ namespace MyAssignment
                             case "drawto":
                                 drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
                                 break;
-
+                                     
                             default:
-                                errorMessages.Add("Unrecognised command at: " + commands[i]);
+                                Form1.ErrorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
 
                         }
@@ -226,6 +263,7 @@ namespace MyAssignment
                         Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
                         Triangle triangle = new(ShapePoint);
                         Circle circle = new(ShapePoint, cordinates[0]);
+
                         //this section checks for processed commands with integer parameters 
                         switch (firstCommand.ToLower()) //uniform all input
                         {
@@ -252,7 +290,7 @@ namespace MyAssignment
                                 break;
 
                             default:
-                                errorMessages.Add("Unrecognised command at: " + commands[i]);
+                                Form1.ErrorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
                         }
                     }
@@ -261,17 +299,17 @@ namespace MyAssignment
 
                 catch(FormatException)
                 {
-                        errorMessages.Add("Incorrect parameter at command: " + commands[i]);
+                        Form1.ErrorMessages.Add("Incorrect parameter at command: " + commands[i]);
                 }
 
                 catch(InvalidOperationException)
                 {
-                      errorMessages.Add("Missing Parameter at command: " + commands[i]);
+                     Form1.ErrorMessages.Add("Missing Parameter at command: " + commands[i]);
                 }
 
                 catch (ArgumentOutOfRangeException)
                 {
-                    errorMessages.Add("The input parameter is too large!");
+                   Form1.ErrorMessages.Add("The input parameter is too large!");
                 }
             }
         }
@@ -304,6 +342,7 @@ namespace MyAssignment
             
         }
 
+        
         /// <summary>
         /// color property used by the color class
         /// sets and gets the colour

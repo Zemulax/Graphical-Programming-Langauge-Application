@@ -217,10 +217,10 @@
         #endregion
         private TextBox InputField;
         private PictureBox MainDisplay;
-        private Button Enter;
+        private new Button Enter;
         private Button Clear;
         private Button Save;
-        private Button Load;
+        private new Button Load;
         private Panel panel1;
         private Label label1;
         private Label label2;

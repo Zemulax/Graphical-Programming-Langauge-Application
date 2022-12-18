@@ -7,7 +7,7 @@ namespace MyAssignment
     /// </summary>
     public class Variables
     {
-        private Dictionary<string,int> variablesDictionary= new();
+        private static Dictionary<string,int> variablesDictionary= new();
         private static readonly List<int> variableints = new();
         public Variables() 
         {
@@ -32,7 +32,7 @@ namespace MyAssignment
         /// dictionary property
         /// allows use of dictionary outside of this class
         /// </summary>
-        public Dictionary<string,int> VariablesDictionary
+        public static Dictionary<string,int> VariablesDictionary
         {
             get { return variablesDictionary; }
             set { variablesDictionary = value; }
@@ -46,17 +46,6 @@ namespace MyAssignment
         public static List<int> VariableInts
         {
             get { return variableints; }
-        }
-    }
-
-
-        /// <summary>
-        /// paramValues property
-        /// allows access to a storage of parameters
-        /// </summary>
-        public List<int> ParamValues
-        {
-            get { return paramValues; }
         }
         
     }

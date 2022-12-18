@@ -4,7 +4,7 @@ namespace MyAssignment
 {
     public partial class Form1 : Form
     {
-
+        private static readonly List<string> errorMessages = new(); //collects exceptions
         readonly DrawService MyDraw = new();
         CommandParser commandParser = new();
         readonly Cursor cursor = new();
@@ -36,7 +36,7 @@ namespace MyAssignment
             
             InputField.Clear();
 
-            foreach(string error in commandParser.errorMessages)
+            foreach(string error in errorMessages)
             {
                 Infotext.Text = Infotext.Text.Insert(0, "\n"+error + "\n");
                 
@@ -64,5 +64,9 @@ namespace MyAssignment
             CommandLine.Text = functionalities.LoadProgram();
         }
 
+        public static List<string> ErrorMessages
+        {
+            get { return errorMessages; }
+        }
     }
 }

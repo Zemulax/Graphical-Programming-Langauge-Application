@@ -35,15 +35,12 @@ namespace MyAssignment
             int parameter1;
             int parameter2;
 
-            //used where points are required
             Point generalUsePoints = new();
 
-            //all command execution happens in here
             for (int i = 0; i < commands.Length; i++)
             {
                 try
                 {
-                    //checks commands that donot draw
                     switch (commands[i].ToLower())
                     {
                         case "pen red":
@@ -94,15 +91,11 @@ namespace MyAssignment
                             ShapePoint = points;
                             continue;
                     }
-
-                    //this block checks if a command is a 
-                    //variable declaration
-                    //if yes, store it in a dictionary
                     if (commands[i].Contains('='))
                     {
                         try
                         {
-                            string[] splitVariable = commands[i].Split('=');
+                            string[] splitVariable = commands[i].Split('=');//mozay = 90
                             collectVariables.Add(splitVariable[0], int.Parse(splitVariable[1]));
                             i++;
                             if (commands[i].Contains('='))
@@ -113,146 +106,126 @@ namespace MyAssignment
                             }
                             else
                             {
-                                errorMessages.Add("Please Declare 2 variables");
+                                MessageBox.Show("Atleast declare 2 variables");
                                 break;
                                 
                             }
                             variables.VariableProcessor(collectVariables);
                         }
-                        catch (Exception) { errorMessages.Add("Bad variable declaration"); break; }
+                        catch (Exception) { MessageBox.Show("more variables than expected"); break; }
                         
                         continue;
                     }
-                  
-                     //this block processes the variables to be used as parameters
-                    if (collectVariables.Count > 1)
+                    //using the variables now
+                    for (int k = 0; k < collectVariables.Count; k++)
                     {
-                        string[] splitcommand = commands[i].Split(" "); //check what variable the command owns
-                        if (splitcommand.Length > 2)
+                        string[] splittingCommand = commands[i].Split(' ');//rectangle x y
+
+                        for (int s = 1; s < splittingCommand.Length; s++)
                         {
-                            foreach(KeyValuePair<string, int> pair in collectVariables)
+                            if (splittingCommand.Length == 3)
                             {
-                                if (pair.Key.Contains(splitcommand[1]))
+                                if (collectVariables.Keys.ElementAt(k).Contains(splittingCommand[s]))
                                 {
-                                    parameter1 = pair.Value;
+                                    parameter1 = Variables.VariableInts[0];
                                     cordinates[0] = parameter1;
+                                    k++;
+                                    s++;
+                                    if (collectVariables.Keys.ElementAt(k).Contains(splittingCommand[s]))
+                                    {
+                                        parameter2 = Variables.VariableInts[1];
+                                        cordinates[1] = parameter2;
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("failed second instead of elemented second");
+
+                                    }
                                 }
-                                else if (pair.Key.Contains(splitcommand[2]))
+                                else
                                 {
-                                    parameter2= pair.Value;
-                                    cordinates[1] = parameter2;
+                                    MessageBox.Show("failed");
                                 }
                             }
-                            generalUsePoints.X = cordinates[0];
-                            generalUsePoints.Y = cordinates[1];
-
-
-                        }
-                        else
-                        {
-                            foreach(KeyValuePair<string,int> pair in collectVariables)
+                            else if (splittingCommand.Length == 2)
                             {
-                                if (pair.Key.Contains(splitcommand[1]))
+                                if (collectVariables.Keys.ElementAt(k).Contains(splittingCommand[1]))
                                 {
-                                    parameter1 = pair.Value;
-                                    parameter2 = pair.Value;
+                                    parameter1 = Variables.VariableInts[0];
                                     cordinates[0] = parameter1;
-                                    cordinates[1] = parameter2;
-
-                                    generalUsePoints.X = cordinates[0];
-                                    generalUsePoints.Y = cordinates[1];
                                 }
                             }
                         }
-                        Cursor cursor = new(ShapePoint);
-                        DrawTo drawto = new(ShapePoint, generalUsePoints);
-                        Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
-                        Triangle triangle = new(ShapePoint);
-                        Circle circle = new(ShapePoint, cordinates[0]);
-                        //this section checks for processed commands with integer parameters 
-                        switch (splitcommand[0].ToLower()) //uniform all input
+
+                        switch (splittingCommand[0])
                         {
-                            case "rectangle":
-                                rectangle1.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                            case "mozay":
+                                MessageBox.Show("mozay cased");
                                 break;
-                            case "circle":
-                                circle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            case "triangle":
-                                triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            case "moveto":
-                                cursor.Points = generalUsePoints;
-                                ShapePoint = cursor.Points;
-                                break;
-
-                            case "drawto":
-                                drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            default:
-                                errorMessages.Add("Unrecognised command at: " + commands[i]);
-                                break;
-
                         }
+                        continue;
+
                     }
-                    else //this section executes commands that do not own variables as parameters
+
+                    string[] separators = { " ", "," };
+                    IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
+                    string firstCommand = values.First().ToLower();
+
+                    
+                    parameter1 = int.Parse(values.Skip(1).First()); //skip the first value which is the "firstCommand",get the second value
+                    parameter2  = int.Parse(values.Last());
+
+                    if (parameter1 >= 515 || parameter1 < 0 || parameter2 > 515 || parameter2 < 0)
                     {
-                        string[] separators = { " ", "," };
-                        IEnumerable<string> values = commands[i].Split(separators, StringSplitOptions.RemoveEmptyEntries); //split the first item in the array by two delimiters
-                        string firstCommand = values.First().ToLower();
-
-
-                        parameter1 = int.Parse(values.Skip(1).First()); //skip the first value which is the "firstCommand",get the second value
-                        parameter2 = int.Parse(values.Last());
-
-                        if (parameter1 >= 515 || parameter1 < 0 || parameter2 > 515 || parameter2 < 0)
-                        {
-                            throw new ArgumentOutOfRangeException(" \nValue out of bounds. limit 515 ");
-                        }
-
-                        cordinates[0] = parameter1;
-                        cordinates[1] = parameter2;
-                        generalUsePoints.X = cordinates[0];
-                        generalUsePoints.Y = cordinates[1];
-
-                        Cursor cursor = new(ShapePoint);
-                        DrawTo drawto = new(ShapePoint, generalUsePoints);
-                        Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
-                        Triangle triangle = new(ShapePoint);
-                        Circle circle = new(ShapePoint, cordinates[0]);
-                        //this section checks for processed commands with integer parameters 
-                        switch (firstCommand.ToLower()) //uniform all input
-                        {
-                            case "rectangle":
-                                rectangle1.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            case "circle":
-                                circle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            case "triangle":
-                                triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            case "moveto":
-
-                                cursor.Points = generalUsePoints;
-                                ShapePoint = cursor.Points;
-                                break;
-
-                            case "drawto":
-                                drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
-                                break;
-
-                            default:
-                                errorMessages.Add("Unrecognised command at: " + commands[i]);
-                                break;
-                        }
+                        throw new ArgumentOutOfRangeException(" \nValue out of bounds. limit 515 ");
                     }
+
+                    cordinates[0] = parameter1;
+                    cordinates[1] = parameter2;
+
+                    
+
+                    //shape objects instantiation
+                    Cursor cursor = new(ShapePoint);
+                    DrawTo drawto = new(ShapePoint, generalUsePoints);
+                    Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
+                    Triangle triangle = new(ShapePoint);
+                    Circle circle = new(ShapePoint, parameter1);
+
+                    //this section checks for processed commands with integer parameters 
+                    switch (firstCommand.ToLower()) //uniform all input
+                    {
+                        case "rectangle":
+                            rectangle1.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                            break;
+
+                        case "circle":
+                            circle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                            break;
+
+                        case "triangle":
+                            triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                            break;
+
+                        case "moveto":
+
+                            cursor.Points = generalUsePoints;
+                            ShapePoint = cursor.Points;
+                            break;
+
+                        case "drawto":
+                            drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                            break;
+
+                        default:
+                            errorMessages.Add("Unrecognised command at: " + commands[i]);
+                            break;
+                    }
+
+
+
+                    
+
 
                 }
 

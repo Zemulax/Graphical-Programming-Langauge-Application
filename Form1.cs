@@ -13,18 +13,11 @@ namespace MyAssignment
         {
             InitializeComponent();
             MyDraw = new DrawService(Graphics.FromImage(MyDraw.DisplayBitmap));
-            InputField.Focus();
-        }
-        private void InputField_KeyDown(object sender, KeyEventArgs e)
-        {    
-            InputField.Focus();  
         }
         private void MainDisplay_Paint(object sender, PaintEventArgs e)
         {
             Graphics graphics = e.Graphics;
             graphics.DrawImageUnscaled(MyDraw.DisplayBitmap, cursor.ShapePoint);
-          
-            
         }
 
         private void Enter_Click(object sender, EventArgs e)
@@ -54,10 +47,8 @@ namespace MyAssignment
 
         private void Clear_Click(object sender, EventArgs e)
         {
-            
-           Graphics graphics = Graphics.FromImage(MyDraw.DisplayBitmap);
-           graphics.Clear(Color.MidnightBlue);
-           
+            Graphics graphics = Graphics.FromImage(MyDraw.DisplayBitmap);
+            graphics.Clear(Color.MidnightBlue);
             Refresh();
         }
 

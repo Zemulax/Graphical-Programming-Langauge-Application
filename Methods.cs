@@ -14,7 +14,6 @@ namespace MyAssignment
 
         public void MethodsProcessor(List<string> collectedMethod) //method mozay(); rectangle 100; circle 200; endmethod
         { 
-            Form1.ErrorMessages.Add("Methods arrived: " + collectedMethod.ToString());
             methodname = collectedMethod[0].Split(' ');
             methodLines[0] = collectedMethod[1];
             methodLines[1] = collectedMethod[2];

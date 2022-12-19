@@ -43,65 +43,7 @@
             {
                 try
                 {
-                    //checks commands that donot draw
-                    switch (commands[i].ToLower())
-                    {
-                       
-                        case "pen red":
-                            colour = Color.Red;
-                            colours.ShapePen = new(Color.Red, 5);
-                            colours.ShapeBrush = new SolidBrush(Color.Red);
-                            continue;
-
-                        case "mozaysssssss":
-                            FlashingColors f = new(graphics,"mozay");
-                            continue;
-
-                        case "pen green":
-                            colour = Color.Red;
-                            colours.ShapePen = new(Color.Green, 5);
-                            colours.ShapeBrush = new SolidBrush(Color.Green);
-                            continue;
-
-                        case "pen magenta":
-                            colour = Color.Red;
-                            colours.ShapePen = new(Color.Magenta, 5);
-                            colours.ShapeBrush = new SolidBrush(Color.Magenta);
-                            continue;
-
-                        case "pen yellow":
-                            colour = Color.Red;
-                            colours.ShapePen = new(Color.Yellow, 5);
-                            colours.ShapeBrush = new SolidBrush(Color.Yellow);
-                            continue;
-
-                        
-
-                        case "default":
-                            colour = Color.White;
-                            colours.ShapePen = new(Color.White, 5);
-                            colours.ShapeBrush = new SolidBrush(Color.White);
-                            continue;
-
-                        case "fill on":
-                            fill = true;
-                            continue;
-
-                        case "fill off":
-                            fill = false;
-                            continue;
-
-                        case "clear":
-                            graphics.Clear(Color.MidnightBlue);
-                            continue;
-
-                        case "reset":
-                            points.X = 0;
-                            points.Y = 0;
-                            ShapePoint = points;
-                            continue;
-                    }
-
+                    //methods
                     if (commands[i].ToLower().StartsWith("method"))
                     {
                         if (commands[i].ToLower().EndsWith("()"))
@@ -151,26 +93,95 @@
                         continue;
 
                     }
-
-                    else if(methods.methodname == null)
+                    else if (methods.methodname == null)
                     {
                     }
                     else if (commands[i].Contains(methods.methodname[1]))
                     {
                         {
-                           for (int c = 0; c < methods.methodLines.Length; c++)
-                           {
-                            commands[i] = methods.methodLines[c];
+                            for (int c = 0; c < methods.methodLines.Length; c++)
+                            {
+                                commands[i] = methods.methodLines[c];
                                 c++;
-                              
+
                             }
                         }
+
                     }
-                    
-                    //if statements
-                    else if (commands[i].StartsWith("if"))
+                    else
+                    {}
+                    //checks commands that donot draw
+                    switch (commands[i].ToLower())
                     {
+                       
+                        case "pen red":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Red, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Red);
+                            continue;
+
+                        case "pen green":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Green, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Green);
+                            continue;
+
+                        case "pen magenta":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Magenta, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Magenta);
+                            continue;
+
+                        case "pen yellow":
+                            colour = Color.Red;
+                            colours.ShapePen = new(Color.Yellow, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.Yellow);
+                            continue;
+
                         
+
+                        case "default":
+                            colour = Color.White;
+                            colours.ShapePen = new(Color.White, 5);
+                            colours.ShapeBrush = new SolidBrush(Color.White);
+                            continue;
+
+                        case "fill on":
+                            fill = true;
+                            continue;
+
+                        case "fill off":
+                            fill = false;
+                            continue;
+
+                        case "clear":
+                            graphics.Clear(Color.MidnightBlue);
+                            continue;
+
+                        case "reset":
+                            points.X = 0;
+                            points.Y = 0;
+                            ShapePoint = points;
+                            continue;
+                    }
+                    if (commands[i].Contains(" = "))
+                    {
+                        try
+                        {
+                            string[] splitVariable = commands[i].Split('=');
+                            collectVariables.Add(splitVariable[0], int.Parse(splitVariable[1]));
+                            variables.VariableProcessor(collectVariables);
+                        }
+                        catch (Exception) { Form1.ErrorMessages.Add("Variables have already been declared"); break; }
+
+                        continue;
+                    }
+
+
+                    //if statements
+                    else if (commands[i].Contains("if"))
+                    {
+
                         Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
                         collectIfStatements.Add(commands[i]);
                         i++;
@@ -178,14 +189,14 @@
                         {
                             collectIfStatements.Add(commands[i]);
                             i++;
-                            
+
                             if (commands[i].Contains(" "))
                             {
                                 collectIfStatements.Add(commands[i]);
                                 i++;
                                 if (commands[i].Contains("endif"))
                                 {
-                                    collectIfStatements.Add(commands[i]);   
+                                    collectIfStatements.Add(commands[i]);
                                 }
                                 else
                                 {
@@ -205,45 +216,19 @@
                             Form1.ErrorMessages.Add("incorrect indentation was detected at line:" + commands[i]);
                             return;
                         }
-                        IfStatements ifStatements = new(collectIfStatements,graphics);
+                        IfStatements ifStatements = new(collectIfStatements, graphics);
                         continue;
                     }
-                    //this block checks if a command is a 
-                    //variable declaration
-                    //if yes, store it in a dictionary
-                    else if (commands[i].Contains('='))
-                    {
-                        try
-                        {
-                            string[] splitVariable = commands[i].Split('=');
-                            collectVariables.Add(splitVariable[0], int.Parse(splitVariable[1]));
-                            i++;
-                            if (commands[i].Contains('='))
-                            {
-                                string[] splitVariable1 = commands[i].Split('=');
-                                collectVariables.Add(splitVariable1[0], int.Parse(splitVariable1[1]));
-                                
-                            }
-                            else
-                            {
-                                Form1.ErrorMessages.Add("Please Declare 2 variables");
-                                break;
-                                
-                            }
-                            variables.VariableProcessor(collectVariables);
-                        }
-                        catch (Exception) { Form1.ErrorMessages.Add("Variables have already been declared"); break; }
-                        
-                        continue;
-                    }
-                  
-                     //this block processes the variables to be used as parameters
-                    if (collectVariables.Count > 1)
+               
+
+
+                    //this block processes the variables to be used as parameters
+                    else if (collectVariables.Count > 0)
                     {
                         string[] splitcommand = commands[i].Split(" "); //check what variable the command owns
                         if (splitcommand.Length > 2)
                         {
-                            foreach(KeyValuePair<string, int> pair in collectVariables)
+                            foreach (KeyValuePair<string, int> pair in collectVariables)
                             {
                                 if (pair.Key.Contains(splitcommand[1]))
                                 {
@@ -252,7 +237,7 @@
                                 }
                                 else if (pair.Key.Contains(splitcommand[2]))
                                 {
-                                    parameter2= pair.Value;
+                                    parameter2 = pair.Value;
                                     cordinates[1] = parameter2;
                                 }
                             }
@@ -263,7 +248,7 @@
                         }
                         else
                         {
-                            foreach(KeyValuePair<string,int> pair in collectVariables)
+                            foreach (KeyValuePair<string, int> pair in collectVariables)
                             {
                                 if (pair.Key.Contains(splitcommand[1]))
                                 {
@@ -295,7 +280,7 @@
                             case "triangle":
                                 triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
                                 break;
-                            
+
 
                             case "moveto":
                                 cursor.Points = generalUsePoints;
@@ -305,7 +290,7 @@
                             case "drawto":
                                 drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
                                 break;
-                                     
+
                             default:
                                 Form1.ErrorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
@@ -313,6 +298,12 @@
                         }
                         continue;
                     }
+
+
+                    
+
+                    
+
                     else //this section executes commands that do not own variables as parameters
                     {
                         string[] separators = { " ", "," };
@@ -375,6 +366,7 @@
                                 Form1.ErrorMessages.Add("Unrecognised command at: " + commands[i]);
                                 break;
                         }
+                       
                     }
 
                 }

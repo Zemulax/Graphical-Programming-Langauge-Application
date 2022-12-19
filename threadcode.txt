@@ -1,0 +1,59 @@
+﻿namespace Threads
+{
+    public partial class Form1 : Form
+    {
+
+        Thread MyThread;
+        bool flag =false;
+        public Form1()
+        {
+            InitializeComponent();
+            MyThread = new(GoesToThread); 
+            MyThread.Start();
+        }
+
+        public void GoesToThread()
+        {
+            while(true)
+            {
+                if(flag == false)
+                {
+                    button1.BackColor = Color.Honeydew;
+                    button2.BackColor = Color.MistyRose;
+                    button3.BackColor = Color.Firebrick;
+                    button4.BackColor = Color.MintCream;
+                    button5.BackColor = Color.Bisque;
+                    button6.BackColor = Color.Beige;
+                    flag = true;
+                   
+                }
+                else
+                {
+
+                    button5.BackColor = Color.Indigo;
+                   
+                    button4.BackColor = Color.PapayaWhip;
+                   
+                    button1.BackColor = Color.LightGoldenrodYellow;
+                   
+                    button6.BackColor = Color.Aquamarine;
+                   
+                    button2.BackColor = Color.Chartreuse;
+                    
+                    button3.BackColor = Color.MediumVioletRed;
+                    
+
+                    flag = false;
+                }
+                Thread.Sleep(100);
+                
+            }
+            
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //flag= !flag;
+        }
+    }
+}

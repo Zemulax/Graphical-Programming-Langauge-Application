@@ -9,10 +9,13 @@ namespace MyAssignment
         CommandParser commandParser = new();
         readonly Cursor cursor = new();
         
+        
         public Form1()
         {
+            
             InitializeComponent();
             MyDraw = new DrawService(Graphics.FromImage(MyDraw.DisplayBitmap));
+           
         }
         private void MainDisplay_Paint(object sender, PaintEventArgs e)
         {
@@ -22,12 +25,11 @@ namespace MyAssignment
 
         private void Enter_Click(object sender, EventArgs e)
         {
-            
             if (InputField.Text == "run" || InputField.Text == "")
             {
                commandParser = new(commandParser.ShapePoint,Graphics.FromImage(MyDraw.DisplayBitmap),CommandLine.Lines);
-                
             }
+
 
             else
             {

@@ -9,12 +9,13 @@
         private readonly Graphics graphics = null;
         readonly int[] cordinates = new int[3];
         private readonly bool fill;
-        private Color colour = Color.White;
+        private static Color colour = Color.White;
         readonly Dictionary<string, int> collectVariables = new();
         readonly Variables variables= new();
         List<string> collectIfStatements = new();
-        
-
+        List<string>collectedMethods = new();
+        Colours colours = new(colour);
+        Methods methods= new Methods();
         /// <summary>
         /// empty commandparser constructor
         /// </summary>
@@ -30,8 +31,8 @@
         /// <param name="commands">commands that determine execution</param>
         public CommandParser(Point points,Graphics graphics,string[] commands)  : base(points)
         {
+            
             this.graphics = graphics;
-            Colours colours = new(colour);
             int parameter1;
             int parameter2;
 
@@ -50,6 +51,10 @@
                             colour = Color.Red;
                             colours.ShapePen = new(Color.Red, 5);
                             colours.ShapeBrush = new SolidBrush(Color.Red);
+                            continue;
+
+                        case "mozaysssssss":
+                            FlashingColors f = new(graphics,"mozay");
                             continue;
 
                         case "pen green":
@@ -97,8 +102,73 @@
                             continue;
                     }
 
+                    if (commands[i].ToLower().StartsWith("method"))
+                    {
+                        if (commands[i].ToLower().EndsWith("()"))
+                        {
+
+                            collectedMethods.Add(commands[i]);
+                            i++;
+                            if (commands[i].StartsWith(" "))
+                            {
+                                collectedMethods.Add(commands[i]);
+                                i++;
+                                if (commands[i].StartsWith(" "))
+                                {
+                                    collectedMethods.Add(commands[i]);
+                                    i++;
+                                    if (commands[i].Contains("endmethod"))
+                                    {
+                                        collectedMethods.Add(commands[i]);
+
+                                    }
+                                    else
+                                    {
+                                        Form1.ErrorMessages.Add("Warning: Method not ended properly at line: " + commands[i]);
+                                        return;
+                                    }
+                                }
+                                else
+                                {
+                                    Form1.ErrorMessages.Add("incorrect indentation detected at line: " + commands[i]);
+                                    return;
+
+                                }
+                            }
+                            else
+                            {
+                                Form1.ErrorMessages.Add("incorrect indentation detected at line: " + commands[i]);
+                                return;
+
+                            }
+                        }
+                        else
+                        {
+                            Form1.ErrorMessages.Add("Warning!! Bad command definition detected. Please inspect and add () at line: " + commands[i]);
+                            return;
+                        }
+                        methods.MethodsProcessor(collectedMethods);
+                        continue;
+
+                    }
+
+                    else if(methods.methodname == null)
+                    {
+                    }
+                    else if (commands[i].Contains(methods.methodname[1]))
+                    {
+                        {
+                           for (int c = 0; c < methods.methodLines.Length; c++)
+                           {
+                            commands[i] = methods.methodLines[c];
+                                c++;
+                              
+                            }
+                        }
+                    }
+                    
                     //if statements
-                    if (commands[i].StartsWith("if"))
+                    else if (commands[i].StartsWith("if"))
                     {
                         
                         Rectangle rectangle1 = new(ShapePoint, cordinates[0], cordinates[1]);
@@ -119,18 +189,21 @@
                                 }
                                 else
                                 {
-                                    Form1.ErrorMessages.Add("if statement not ended correctly");
+                                    Form1.ErrorMessages.Add("if statement not ended correctly at line:" + commands[i]);
+                                    return;
                                 }
                             }
                             else
                             {
-                                Form1.ErrorMessages.Add("incorrect indentation was detected");
+                                Form1.ErrorMessages.Add("incorrect indentation was detected at line: " + commands[i]);
+                                return;
                             }
 
                         }
                         else
                         {
-                            Form1.ErrorMessages.Add("incorrect indentation was detected");
+                            Form1.ErrorMessages.Add("incorrect indentation was detected at line:" + commands[i]);
+                            return;
                         }
                         IfStatements ifStatements = new(collectIfStatements,graphics);
                         continue;
@@ -222,6 +295,7 @@
                             case "triangle":
                                 triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
                                 break;
+                            
 
                             case "moveto":
                                 cursor.Points = generalUsePoints;
@@ -237,6 +311,7 @@
                                 break;
 
                         }
+                        continue;
                     }
                     else //this section executes commands that do not own variables as parameters
                     {
@@ -280,13 +355,20 @@
                                 break;
 
                             case "moveto":
-
                                 cursor.Points = generalUsePoints;
                                 ShapePoint = cursor.Points;
                                 break;
 
                             case "drawto":
                                 drawto.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                                break;
+
+                            case "penta":
+                                Pen penpen = new (Color.Red);
+                                triangle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                                circle.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                                rectangle1.DrawShape(graphics, fill, colours.ShapePen, colours.ShapeBrush);
+                                graphics.DrawBezier(penpen, 40, 80, 120, 160, 200, 240, 280, 320);
                                 break;
 
                             default:
@@ -297,7 +379,12 @@
 
                 }
 
-                catch(FormatException)
+                catch (NullReferenceException)
+                {
+                    Form1.ErrorMessages.Add("Warning! Please check that your method definition contains ()");
+                }
+
+                catch (FormatException)
                 {
                         Form1.ErrorMessages.Add("Incorrect parameter at command: " + commands[i]);
                 }
@@ -311,9 +398,12 @@
                 {
                    Form1.ErrorMessages.Add("The input parameter is too large!");
                 }
+                
+            
             }
         }
         
+
         /// <summary>
         /// sets and gets the coordiated into the array
         /// </summary>

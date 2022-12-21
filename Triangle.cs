@@ -6,11 +6,13 @@ namespace MyAssignment
     /// </summary>
     public class Triangle : Shape
     {
+
+        public Triangle():base() { }
         /// <summary>
         /// triangle constructor
         /// </summary>
         /// <param name="points"></param>
-        public Triangle(Point points) : base(points)
+        public Triangle(Point points,Color color) : base(points,color)
         {
         }
 
@@ -19,11 +21,11 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">surface to be drawn on</param>
         /// <param name="fill">whether the shape shoulf be colored or outlined</param>
-        public override void DrawShape(Graphics graphics, bool fill, Pen shapePen,Brush shapeBrush)
+        public override void DrawShape(Graphics graphics)
         {
-            graphics.DrawLine(shapePen, 180, 200, 50, 320);
-            graphics.DrawLine(shapePen, 50, 320, 320, 320);
-            graphics.DrawLine(shapePen, 320, 320, 180, 200);
+            graphics.DrawLine(ShapePen, 180, 200, 50, 320);
+            graphics.DrawLine(ShapePen, 50, 320, 320, 320);
+            graphics.DrawLine(ShapePen, 320, 320, 180, 200);
             
         }
     }

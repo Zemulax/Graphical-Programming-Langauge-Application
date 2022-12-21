@@ -15,7 +15,8 @@ namespace MyAssignment
         /// all classes must have this general implementation
         /// </summary>
         /// <param name="graphics"></param>
-        void DrawShape(Graphics graphics, bool fill,Pen shapePen,Brush shapeBrush);
+        void DrawShape(Graphics graphics);
+        void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen,params int[] coordinates);
 
     }
 }

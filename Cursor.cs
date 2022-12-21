@@ -22,16 +22,21 @@ namespace MyAssignment
         /// <summary>
         /// empty constructor
         /// </summary>
-        public Cursor() { }
+        public Cursor():base() { }
 
 
         /// <summary>
         /// cursor constructor
         /// </summary>
         /// <param name="point">points to update the cursor</param>
-        public Cursor(Point point) : base(point)
+        public Cursor(Point point,Color color) : base(point,color)
         {
             points = ShapePoint;
+        }
+
+        public override void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
+        {
+            base.Set(color, fill, shapeBrush, shapePen, coordinates[0], coordinates[1]);
         }
 
         /// <summary>
@@ -39,9 +44,9 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphic">surface to draw the cursor on</param>
         /// <param name="fill">determines whether the cursor should be outlined or colored</param>
-        public override void DrawShape(Graphics graphic,bool fill,Pen shapePen, Brush shapeBrush)
+        public override void DrawShape(Graphics graphic)
         {
-            graphic.DrawRectangle(shapePen, ShapePoint.X, ShapePoint.Y, 5, 5);
+            graphic.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, 5, 5);
 
         }
 

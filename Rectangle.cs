@@ -14,7 +14,7 @@ namespace MyAssignment
         /// <summary>
         /// empty constructor
         /// </summary>
-        Rectangle()
+        public Rectangle():base()
         {
 
         }
@@ -25,7 +25,7 @@ namespace MyAssignment
         /// <param name="yPos">the y axis where the rectangle will be drawn</param>
         /// <param name="width">width of the rectangle to be drawn</param>
         /// <param name="length">length of the rectangle to be drawn</param>
-        public Rectangle(Point point, int width, int length): base(point)
+        public Rectangle(Point point, Color color, int width, int length): base(point,color)
         {
             this.width = width;
             this.length = length;
@@ -59,6 +59,13 @@ namespace MyAssignment
         /// returns the pen object
         /// </summary>
 
+        public override void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
+        {
+            base.Set(color, fill, shapeBrush, shapePen, coordinates[0], coordinates[1]);
+            width = coordinates[2];
+            length = coordinates[3];
+
+        }
 
         /// <summary>
         /// draw method for rectangle class
@@ -66,14 +73,15 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
         /// <param name="fill">specifies whether the object should be colored or outlined</param>
-        public  override void DrawShape(Graphics graphics, bool fill, Pen shapePen, Brush shapeBrush)
-        {  if (fill == true)
+        public  override void DrawShape(Graphics graphics)
+        {  
+            if (fill == true)
                 {
-                    graphics.FillRectangle(shapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
+                    graphics.FillRectangle(ShapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
                 }
                 else
                 {
-                    graphics.DrawRectangle(shapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
+                    graphics.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
                 }
         }
     }

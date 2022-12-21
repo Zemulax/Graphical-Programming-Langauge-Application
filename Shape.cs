@@ -6,7 +6,11 @@ namespace MyAssignment
     /// </summary>
     public abstract class Shape : ShapesInterface
     {
-        private Point mypoint;
+        protected Point mypoint;
+        protected Color shapecolor;
+        protected bool fill;
+        Brush shapeBrush;
+        Pen shapePen;
         
         /// <summary>
         /// empty constructor
@@ -18,9 +22,10 @@ namespace MyAssignment
         /// </summary>
         /// <param name="xposition">x axis</param>
         /// <param name="yposition">y axis</param>
-        public Shape(Point point)
+        public Shape(Point point, Color shapecolor)
         {
             mypoint = point;
+            this.shapecolor = shapecolor;
            // MessageBox.Show("" + mypoint);
             
         }
@@ -33,11 +38,39 @@ namespace MyAssignment
             
         }
 
+        public Color ShapeColor
+        {
+            set { shapecolor = value; }
+            get { return shapecolor; }
+        }
+
+        public Brush ShapeBrush
+        {
+            set { shapeBrush = value; }
+            get { return shapeBrush; }
+        }
+        public Pen ShapePen
+        {
+            set { shapePen = value; }
+            get { return shapePen; }
+        }
+
        /// <summary>
        /// Every object of shape must have this method
        /// </summary>
        /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
-        public abstract void DrawShape(Graphics graphics, bool fill, Pen shapePen, Brush shapeBrush);
+        public abstract void DrawShape(Graphics graphics);
+
+        public virtual void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
+        {
+            this.shapecolor = color;
+            this.fill = fill;
+            this.shapeBrush = shapeBrush;
+            this.shapePen = shapePen;
+
+            mypoint.X = coordinates[0];
+            mypoint.Y = coordinates[1];
+        }
     }
     
 }

@@ -1,19 +1,17 @@
 ﻿
+using System.Collections;
+
 namespace MyAssignment
 {
     /// <summary>
     /// classs used to execute code determined by 
     /// a condition
     /// </summary>
-    public class IfStatements : Shape
+    public class IfStatements
     {
         private readonly Dictionary<string, int> ifstatementsDictionary= new();
-        private static string line;
-        Graphics graphics;
-        private  readonly Color colour = Color.White;
-        readonly CommandParser commandParser = new();
-
-        int shapeParameter = 0;
+        static int shapeParameter = 0;
+        static readonly string[] methodlines = new string[2];
 
         public IfStatements() { }
 
@@ -22,9 +20,8 @@ namespace MyAssignment
         /// </summary>
         /// <param name="ifStatementsList">an if statement block to be processed</param>
         /// <param name="graphihcs">a drawing surface for commands in if statements</param>
-        public IfStatements(List<string> ifStatementsList, Graphics graphics) 
+        public IfStatements(List<string> ifStatementsList) 
         {
-            this.graphics = graphics;
             string[] ifstatementSplit = ifStatementsList[0].Split(" "); //if mozay = 90; line1 ;line2 ;endif
             ifstatementsDictionary.Add(ifstatementSplit[1], int.Parse(ifstatementSplit[3])); //take specific values from the array
 
@@ -32,9 +29,9 @@ namespace MyAssignment
             string[] line1 = ifStatementsList[1].Split(" ");
             string[] line2 = ifStatementsList[2].Split(" ");
 
-            string[] west = new string[2];
-            west[0] = line1[1];
-            west[1] = line2[1];
+           
+            methodlines[0] = line1[1];
+            methodlines[1] = line2[1];
 
             foreach (KeyValuePair<string, int> pairs in Variables.VariablesDictionary)
             {
@@ -60,40 +57,25 @@ namespace MyAssignment
 
                 
             }
-            Rectangle rectangle1 = new(ShapePoint, shapeParameter,shapeParameter);
-            Circle circle = new(ShapePoint, shapeParameter);
-            Colours colours = new(colour);
-
-            for(int x = 0; x < west.Length; x++)
-            {
-                switch (west[x])
-                {
-                    case "rectangle":
-                        rectangle1.DrawShape(graphics, commandParser.Fill, colours.ShapePen, colours.ShapeBrush);
-                        break;
-
-                    case "circle":
-                        circle.DrawShape(graphics, commandParser.Fill, colours.ShapePen, colours.ShapeBrush);
-                        break;
-
-                    default:
-                        break;
-                }
-
-            }
-
-
 
         }
-        public static string Line 
-        { 
-            get { return line; }
-            //set { line =value; }
-        }
 
-        public override void DrawShape(Graphics graphics, bool fill, Pen shapePen, Brush shapeBrush)
+        /// <summary>
+        /// shape parameter property is used to
+        /// supply a draw parameter when an if statement is drawn
+        /// </summary>
+        public static int ShapeParameter
         {
-            throw new NotImplementedException();
+            get { return shapeParameter; }
+        }
+        /// <summary>
+        /// property for method lines is used to
+        /// provide access to the line within
+        /// an if-statement block
+        /// </summary>
+        public static Array Methodlines
+        {
+            get { return methodlines; }
         }
     }
 }

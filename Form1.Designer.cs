@@ -51,10 +51,10 @@
             this.InputField.BackColor = System.Drawing.SystemColors.Control;
             this.InputField.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.InputField.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.InputField.Location = new System.Drawing.Point(540, 594);
+            this.InputField.Location = new System.Drawing.Point(680, 594);
             this.InputField.Name = "InputField";
             this.InputField.PlaceholderText = "Single Command Line...";
-            this.InputField.Size = new System.Drawing.Size(415, 24);
+            this.InputField.Size = new System.Drawing.Size(496, 24);
             this.InputField.TabIndex = 2;
             // 
             // MainDisplay
@@ -64,7 +64,7 @@
             this.MainDisplay.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.MainDisplay.Location = new System.Drawing.Point(12, 68);
             this.MainDisplay.Name = "MainDisplay";
-            this.MainDisplay.Size = new System.Drawing.Size(520, 520);
+            this.MainDisplay.Size = new System.Drawing.Size(652, 520);
             this.MainDisplay.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.MainDisplay.TabIndex = 3;
             this.MainDisplay.TabStop = false;
@@ -76,7 +76,7 @@
             this.Enter.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Enter.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Enter.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Enter.Location = new System.Drawing.Point(422, 594);
+            this.Enter.Location = new System.Drawing.Point(554, 594);
             this.Enter.Name = "Enter";
             this.Enter.Size = new System.Drawing.Size(110, 50);
             this.Enter.TabIndex = 5;
@@ -102,7 +102,7 @@
             this.Save.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.Save.Font = new System.Drawing.Font("Unispace", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.Save.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Save.Location = new System.Drawing.Point(302, 594);
+            this.Save.Location = new System.Drawing.Point(434, 594);
             this.Save.Name = "Save";
             this.Save.Size = new System.Drawing.Size(114, 50);
             this.Save.TabIndex = 7;
@@ -129,7 +129,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(941, 53);
+            this.panel1.Size = new System.Drawing.Size(1164, 53);
             this.panel1.TabIndex = 9;
             // 
             // label1
@@ -137,7 +137,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Unispace", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(393, 5);
+            this.label1.Location = new System.Drawing.Point(433, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 48);
             this.label1.TabIndex = 0;
@@ -148,7 +148,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Unispace", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label2.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label2.Location = new System.Drawing.Point(538, 400);
+            this.label2.Location = new System.Drawing.Point(680, 396);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(142, 24);
             this.label2.TabIndex = 13;
@@ -159,21 +159,21 @@
             this.Infotext.BulletIndent = 1;
             this.Infotext.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Infotext.ForeColor = System.Drawing.Color.OrangeRed;
-            this.Infotext.Location = new System.Drawing.Point(538, 423);
+            this.Infotext.Location = new System.Drawing.Point(680, 423);
             this.Infotext.Name = "Infotext";
             this.Infotext.ReadOnly = true;
             this.Infotext.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.Infotext.Size = new System.Drawing.Size(415, 165);
+            this.Infotext.Size = new System.Drawing.Size(496, 165);
             this.Infotext.TabIndex = 12;
             this.Infotext.Text = "";
             // 
             // CommandLine
             // 
             this.CommandLine.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.CommandLine.Location = new System.Drawing.Point(538, 99);
+            this.CommandLine.Location = new System.Drawing.Point(680, 99);
             this.CommandLine.Name = "CommandLine";
             this.CommandLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.CommandLine.Size = new System.Drawing.Size(415, 283);
+            this.CommandLine.Size = new System.Drawing.Size(496, 283);
             this.CommandLine.TabIndex = 14;
             this.CommandLine.Text = "";
             // 
@@ -182,7 +182,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Unispace", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label3.ForeColor = System.Drawing.SystemColors.MenuHighlight;
-            this.label3.Location = new System.Drawing.Point(536, 76);
+            this.label3.Location = new System.Drawing.Point(680, 76);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(189, 20);
             this.label3.TabIndex = 15;
@@ -192,7 +192,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(967, 648);
+            this.ClientSize = new System.Drawing.Size(1188, 648);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.CommandLine);
             this.Controls.Add(this.label2);

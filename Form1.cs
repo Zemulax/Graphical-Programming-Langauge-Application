@@ -8,7 +8,9 @@ namespace MyAssignment
         readonly DrawService MyDraw = new();
         CommandParser commandParser = new();
         readonly Cursor cursor = new();
+        Color color =  Color.White;
         
+        ShapeFactory ShapeFactoryshape = new ShapeFactory();
         
         public Form1()
         {
@@ -27,13 +29,14 @@ namespace MyAssignment
         {
             if (InputField.Text == "run" || InputField.Text == "")
             {
-               commandParser = new(commandParser.ShapePoint,Graphics.FromImage(MyDraw.DisplayBitmap),CommandLine.Lines);
+               commandParser = new(commandParser.ShapePoint,color,Graphics.FromImage(MyDraw.DisplayBitmap),CommandLine.Lines);
             }
 
 
             else
             {
-               commandParser = new(commandParser.ShapePoint,Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines);
+              commandParser = new(commandParser.ShapePoint,color, Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines);
+             
             }
             
             InputField.Clear();

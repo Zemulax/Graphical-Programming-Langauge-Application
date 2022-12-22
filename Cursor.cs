@@ -37,6 +37,8 @@ namespace MyAssignment
         public override void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
         {
             base.Set(color, fill, shapeBrush, shapePen, coordinates[0], coordinates[1]);
+            points.X = coordinates[0];
+            points.Y = coordinates[1];
         }
 
         /// <summary>
@@ -46,7 +48,7 @@ namespace MyAssignment
         /// <param name="fill">determines whether the cursor should be outlined or colored</param>
         public override void DrawShape(Graphics graphic)
         {
-            graphic.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, 5, 5);
+            graphic.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y,0,0);
 
         }
 

@@ -40,6 +40,8 @@
             this.Infotext = new System.Windows.Forms.RichTextBox();
             this.CommandLine = new System.Windows.Forms.RichTextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.liveTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -51,7 +53,7 @@
             this.InputField.BackColor = System.Drawing.SystemColors.Control;
             this.InputField.Font = new System.Drawing.Font("Lucida Console", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.InputField.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.InputField.Location = new System.Drawing.Point(680, 594);
+            this.InputField.Location = new System.Drawing.Point(768, 594);
             this.InputField.Name = "InputField";
             this.InputField.PlaceholderText = "Single Command Line...";
             this.InputField.Size = new System.Drawing.Size(496, 24);
@@ -129,7 +131,7 @@
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1164, 53);
+            this.panel1.Size = new System.Drawing.Size(1320, 53);
             this.panel1.TabIndex = 9;
             // 
             // label1
@@ -156,6 +158,7 @@
             // 
             // Infotext
             // 
+            this.Infotext.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.Infotext.BulletIndent = 1;
             this.Infotext.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.Infotext.ForeColor = System.Drawing.Color.OrangeRed;
@@ -163,7 +166,7 @@
             this.Infotext.Name = "Infotext";
             this.Infotext.ReadOnly = true;
             this.Infotext.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.Infotext.Size = new System.Drawing.Size(496, 165);
+            this.Infotext.Size = new System.Drawing.Size(652, 165);
             this.Infotext.TabIndex = 12;
             this.Infotext.Text = "";
             // 
@@ -173,9 +176,10 @@
             this.CommandLine.Location = new System.Drawing.Point(680, 99);
             this.CommandLine.Name = "CommandLine";
             this.CommandLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.CommandLine.Size = new System.Drawing.Size(496, 283);
+            this.CommandLine.Size = new System.Drawing.Size(314, 283);
             this.CommandLine.TabIndex = 14;
             this.CommandLine.Text = "";
+            this.CommandLine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommandLine_KeyDown);
             // 
             // label3
             // 
@@ -186,16 +190,43 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(189, 20);
             this.label3.TabIndex = 15;
-            this.label3.Text = "Multi Command LIne";
+            this.label3.Text = "Multi Command Line";
+            // 
+            // liveTextBox1
+            // 
+            this.liveTextBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
+            this.liveTextBox1.BulletIndent = 1;
+            this.liveTextBox1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.liveTextBox1.ForeColor = System.Drawing.Color.OrangeRed;
+            this.liveTextBox1.Location = new System.Drawing.Point(1021, 99);
+            this.liveTextBox1.Name = "liveTextBox1";
+            this.liveTextBox1.ReadOnly = true;
+            this.liveTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.liveTextBox1.Size = new System.Drawing.Size(311, 283);
+            this.liveTextBox1.TabIndex = 12;
+            this.liveTextBox1.Text = "";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Unispace", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label4.ForeColor = System.Drawing.SystemColors.MenuHighlight;
+            this.label4.Location = new System.Drawing.Point(1021, 76);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(209, 20);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Live Changes Tracker";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1188, 648);
+            this.ClientSize = new System.Drawing.Size(1339, 648);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.CommandLine);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.liveTextBox1);
             this.Controls.Add(this.Infotext);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Load);
@@ -227,5 +258,7 @@
         private RichTextBox Infotext;
         private RichTextBox CommandLine;
         private Label label3;
+        private RichTextBox liveTextBox1;
+        private Label label4;
     }
 }

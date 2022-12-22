@@ -35,6 +35,7 @@ namespace MyAssignment
 
             foreach (KeyValuePair<string, int> pairs in Variables.VariablesDictionary)
             {
+                MessageBox.Show("here");
 
                 if (ifstatementsDictionary.ContainsKey(pairs.Key.Trim()))
                 {

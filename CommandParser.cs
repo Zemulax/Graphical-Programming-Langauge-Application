@@ -55,13 +55,15 @@ namespace MyAssignment
                     {
                         if (commands[i].ToLower().EndsWith("()"))
                         {
-
-                            collectedMethods.Add(commands[i]);
-                            i++;
-                            if (commands[i].StartsWith(" ")) //method line should be indented
+                            try
                             {
+
                                 collectedMethods.Add(commands[i]);
                                 i++;
+                                if (commands[i].StartsWith(" ")) //method line should be indented
+                                {
+                                    collectedMethods.Add(commands[i]);
+                                    i++;
                                     if (commands[i].Contains("endmethod"))
                                     {
                                         collectedMethods.Add(commands[i]);
@@ -72,12 +74,20 @@ namespace MyAssignment
                                         Form1.ErrorMessages.Add("Warning: Method not ended properly at line: " + commands[i]);
                                         return;
                                     }
-                            }
-                            else
-                            {
-                                Form1.ErrorMessages.Add("incorrect indentation detected at line: " + commands[i]);
-                                return;
+                                }
+                                else
+                                {
+                                    Form1.ErrorMessages.Add("incorrect indentation detected at line: " + commands[i]);
+                                    return;
 
+                                }
+                            }
+
+                             catch(IndexOutOfRangeException)
+                            {
+                                IndexOutOfRangeException indexOutOfRangeException = new("A method body is required");
+                                Form1.ErrorMessages.Add(indexOutOfRangeException.Message);
+                                break;
                             }
                         }
                         else
@@ -167,41 +177,55 @@ namespace MyAssignment
                     //this block executes if-statements
                     else if (commands[i].Contains("if"))
                     {
-
-                        collectIfStatements.Add(commands[i]);
-                        i++;
-                        if (commands[i].Contains(" "))
+                        if (commands[i].Contains("if")) 
                         {
-                            collectIfStatements.Add(commands[i]);
-                            i++;
-
-                            if (commands[i].Contains(" "))
+                            try
                             {
+
                                 collectIfStatements.Add(commands[i]);
                                 i++;
-                                if (commands[i].Contains("endif")) //if statement must end with an endif
+                                if (commands[i].Contains(" "))
                                 {
                                     collectIfStatements.Add(commands[i]);
+                                    i++;
+
+                                    if (commands[i].Contains(" "))
+                                    {
+                                        collectIfStatements.Add(commands[i]);
+                                        i++;
+                                        if (commands[i].Contains("endif")) //if statement must end with an endif
+                                        {
+                                            collectIfStatements.Add(commands[i]);
+                                        }
+                                        else
+                                        {
+                                            Form1.ErrorMessages.Add("if statement not ended correctly at line:" + commands[i]);
+                                            return;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Form1.ErrorMessages.Add("incorrect indentation was detected at line: " + commands[i]);
+                                        return;
+                                    }
+
                                 }
+                                //if block ends here
                                 else
                                 {
-                                    Form1.ErrorMessages.Add("if statement not ended correctly at line:" + commands[i]);
+                                    Form1.ErrorMessages.Add("incorrect indentation was detected at line:" + commands[i]);
                                     return;
                                 }
                             }
-                            else
+                            catch (IndexOutOfRangeException)
                             {
-                                Form1.ErrorMessages.Add("incorrect indentation was detected at line: " + commands[i]);
-                                return;
-                            }
+                                IndexOutOfRangeException indexOutOfRangeException = new("if statement body required");
+                                Form1.ErrorMessages.Add(indexOutOfRangeException.Message);
+                                break;
 
+                            }
                         }
-                        //if block ends here
-                        else
-                        {
-                            Form1.ErrorMessages.Add("incorrect indentation was detected at line:" + commands[i]);
-                            return;
-                        }
+                      
 
                         //this block executes if statements with 2 lines
                         //checks each lines's contents and runs it
@@ -310,22 +334,27 @@ namespace MyAssignment
 
                 catch (NullReferenceException)
                 {
-                    Form1.ErrorMessages.Add("Warning! Please check that your method definition contains ()");
+                    NullReferenceException nullReferenceException= new ("Warning! Please check that your method definition contains ()");
+                  
+                    Form1.ErrorMessages.Add(nullReferenceException.Message);
                 }
 
                 catch (FormatException)
                 {
-                        Form1.ErrorMessages.Add("Incorrect parameter at command: " + commands[i]);
+                    FormatException formatException =  new("Incorrect parameter at command: " + commands[i]);
+                    Form1.ErrorMessages.Add(formatException.Message);
                 }
 
                 catch(InvalidOperationException)
                 {
-                     Form1.ErrorMessages.Add("Missing Parameter at command: " + commands[i]);
+                    InvalidOperationException invalidOperationException = new("Missing Parameter at command: ");
+                     Form1.ErrorMessages.Add( invalidOperationException.Message + commands[i]);
                 }
 
                 catch (ArgumentOutOfRangeException)
                 {
-                   Form1.ErrorMessages.Add("The input parameter is too large!");
+                    ArgumentOutOfRangeException argumentOutOfRangeException = new("The input parameter is too large!");
+                    Form1.ErrorMessages.Add(argumentOutOfRangeException.Message);
                 }
                 
             
@@ -374,7 +403,7 @@ namespace MyAssignment
 
                 default:
                     Form1.ErrorMessages.Add("Unrecognised command at: " + command);
-                    break;
+                    return;
             }
         }
 

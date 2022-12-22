@@ -5,12 +5,13 @@ namespace MyAssignment
     public partial class Form1 : Form
     {
         private static readonly List<string> errorMessages = new(); //collects exceptions
+        private static readonly List<string> syntaxChecks = new(); //collects live sytntax checks
+        //private static readonly Dictionary<string, string> syntaxErrors = new();
         readonly DrawService MyDraw = new();
         CommandParser commandParser = new();
         readonly Cursor cursor = new();
         Color color =  Color.White;
-        
-        ShapeFactory ShapeFactoryshape = new ShapeFactory();
+        LiveChangesReport changesReport;
         
         public Form1()
         {
@@ -72,6 +73,28 @@ namespace MyAssignment
         public static List<string> ErrorMessages
         {
             get { return errorMessages; }
+        }
+        public static List<string> SyntaxChecks
+        {
+            get { return syntaxChecks; }
+        }
+
+      
+
+        private void CommandLine_KeyDown(object sender, KeyEventArgs e)
+        {
+            liveTextBox1.Clear();
+            if (e.KeyCode == Keys.Enter)
+            {
+                changesReport = new(CommandLine.Lines);
+                foreach(string error in syntaxChecks)
+                {
+                    liveTextBox1.Text = liveTextBox1.Text.Insert(0, "\n" + error + "\n");
+
+                }
+            }
+            syntaxChecks.Clear();
+            
         }
     }
 }

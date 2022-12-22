@@ -6,7 +6,11 @@ namespace MyAssignment
     /// </summary>
     public abstract class Shape : ShapesInterface
     {
-        protected Point mypoint;
+        protected Point mypoint = new()
+        {
+            X = 100,
+            Y = 50
+        };
         protected Color shapecolor;
         protected bool fill;
         Brush shapeBrush;

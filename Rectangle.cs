@@ -10,13 +10,11 @@ namespace MyAssignment
     {
         private int length;
         private int width;
-
         /// <summary>
         /// empty constructor
         /// </summary>
         public Rectangle():base()
         {
-
         }
         /// <summary>
         /// constructor for rectangle shapes
@@ -73,16 +71,17 @@ namespace MyAssignment
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
         /// <param name="fill">specifies whether the object should be colored or outlined</param>
-        public  override void DrawShape(Graphics graphics)
-        {  
-            if (fill == true)
-                {
-                    graphics.FillRectangle(ShapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
-                }
-                else
-                {
-                    graphics.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
-                }
+        public override void DrawShape(Graphics graphics)
+        {
+            if (this.fill == true)
+            {
+                graphics.FillRectangle(ShapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
+            }
+            else
+            {
+                graphics.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
+            }
         }
+
     }
 }

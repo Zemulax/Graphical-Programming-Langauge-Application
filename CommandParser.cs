@@ -8,8 +8,7 @@ namespace MyAssignment
     /// </summary>
     public class CommandParser  : Shape
     {
-       
-        private readonly Graphics graphics = null;
+        private readonly Graphics graphics;
         readonly int[] cordinates = new int[5];
         private static Color colour = Color.White;
         readonly Dictionary<string, int> collectVariables = new();
@@ -18,13 +17,13 @@ namespace MyAssignment
         private readonly List<string> collectedMethods = new();
         private readonly Colours colours = new(colour);
         private readonly Methods methods = new();
-        private Shape shape;
+        private Shape? shape = null;
         readonly ShapeFactory shapeFactory = new();
 
         /// <summary>
         /// empty commandparser constructor
         /// </summary>
-        public CommandParser() : base()
+        public CommandParser()
         { 
         }
 
@@ -37,7 +36,6 @@ namespace MyAssignment
         /// <param name="color">color of the shape object</param>
         public CommandParser(Point points,Color color,Graphics graphics,string[] commands)  : base(points,color)
         {
-           
             int parameter1;
             int parameter2;
             this.graphics = graphics;
@@ -92,10 +90,11 @@ namespace MyAssignment
                         }
                         else
                         {
-                            Form1.ErrorMessages.Add("Warning!! Bad command definition detected. Please inspect and add () at line: " + commands[i]);
+                            Form1.ErrorMessages.Add("Warning!! Bad method definition. Missing '()' at line: " + commands[i]);
                             return;
                         }
                         methods.MethodsProcessor(collectedMethods);
+                        collectedMethods.Clear();
                         continue;
 
                     }
@@ -184,12 +183,12 @@ namespace MyAssignment
 
                                 collectIfStatements.Add(commands[i]);
                                 i++;
-                                if (commands[i].Contains(" "))
+                                if (commands[i].Contains(' '))
                                 {
                                     collectIfStatements.Add(commands[i]);
                                     i++;
 
-                                    if (commands[i].Contains(" "))
+                                    if (commands[i].Contains(' '))
                                     {
                                         collectIfStatements.Add(commands[i]);
                                         i++;
@@ -225,8 +224,8 @@ namespace MyAssignment
 
                             }
                         }
-                      
 
+                        
                         //this block executes if statements with 2 lines
                         //checks each lines's contents and runs it
                         IfStatements ifStatements = new(collectIfStatements);
@@ -348,13 +347,13 @@ namespace MyAssignment
                 catch(InvalidOperationException)
                 {
                     InvalidOperationException invalidOperationException = new("Missing Parameter at command: ");
-                     Form1.ErrorMessages.Add( invalidOperationException.Message + commands[i]);
+                    Form1.ErrorMessages.Add( invalidOperationException.Message + commands[i]);
                 }
 
                 catch (ArgumentOutOfRangeException)
                 {
-                    ArgumentOutOfRangeException argumentOutOfRangeException = new("The input parameter is too large!");
-                    Form1.ErrorMessages.Add(argumentOutOfRangeException.Message);
+                    ArgumentException argumentException = new ("The input parameter is too large!");
+                    Form1.ErrorMessages.Add(argumentException.Message);
                 }
                 
             
@@ -440,7 +439,7 @@ namespace MyAssignment
         /// color property used by the color class
         /// sets and gets the colour
         /// </summary>
-        public Color Colour
+        public static Color Colour
         {
             get { return colour; }
             set { colour = value; }

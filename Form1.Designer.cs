@@ -139,7 +139,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Unispace", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.label1.ForeColor = System.Drawing.Color.Transparent;
-            this.label1.Location = new System.Drawing.Point(433, 5);
+            this.label1.Location = new System.Drawing.Point(588, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(116, 48);
             this.label1.TabIndex = 0;
@@ -176,7 +176,7 @@
             this.CommandLine.Location = new System.Drawing.Point(680, 99);
             this.CommandLine.Name = "CommandLine";
             this.CommandLine.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.CommandLine.Size = new System.Drawing.Size(314, 283);
+            this.CommandLine.Size = new System.Drawing.Size(222, 283);
             this.CommandLine.TabIndex = 14;
             this.CommandLine.Text = "";
             this.CommandLine.KeyDown += new System.Windows.Forms.KeyEventHandler(this.CommandLine_KeyDown);
@@ -198,11 +198,11 @@
             this.liveTextBox1.BulletIndent = 1;
             this.liveTextBox1.Font = new System.Drawing.Font("Lucida Console", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.liveTextBox1.ForeColor = System.Drawing.Color.OrangeRed;
-            this.liveTextBox1.Location = new System.Drawing.Point(1021, 99);
+            this.liveTextBox1.Location = new System.Drawing.Point(908, 99);
             this.liveTextBox1.Name = "liveTextBox1";
             this.liveTextBox1.ReadOnly = true;
             this.liveTextBox1.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
-            this.liveTextBox1.Size = new System.Drawing.Size(311, 283);
+            this.liveTextBox1.Size = new System.Drawing.Size(424, 283);
             this.liveTextBox1.TabIndex = 12;
             this.liveTextBox1.Text = "";
             // 

@@ -9,7 +9,6 @@ namespace MyAssignment
     {
         int radius;
 
-
         /// <summary>
         /// empty constructor
         /// </summary>

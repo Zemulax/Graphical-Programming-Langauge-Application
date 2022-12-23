@@ -10,10 +10,9 @@ namespace MyAssignment
     {
         private Brush shapeBrush= new SolidBrush(Color.White);
         private Pen shapePen = new(Color.White);
+  
 
-       
-        bool flag = false;
-        
+
         /// <summary>
         /// constructor for setting up the new color
         /// </summary>
@@ -21,13 +20,9 @@ namespace MyAssignment
         public Colours(Color colour) 
         {
             ShapePen = new Pen(colour,5);
-            
-
         }
 
         public Colours() {}
-
-       
 
         /// <summary>
         /// brush property

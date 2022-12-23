@@ -6,16 +6,14 @@ namespace MyAssignment
     {
         private static readonly List<string> errorMessages = new(); //collects exceptions
         private static readonly List<string> syntaxChecks = new(); //collects live sytntax checks
-        //private static readonly Dictionary<string, string> syntaxErrors = new();
         readonly DrawService MyDraw = new();
         CommandParser commandParser = new();
         readonly Cursor cursor = new();
-        Color color =  Color.White;
-        LiveChangesReport changesReport;
+        readonly Color color =  Color.White;
+        private LiveChangesReport changesReport = null;
         
         public Form1()
         {
-            
             InitializeComponent();
             MyDraw = new DrawService(Graphics.FromImage(MyDraw.DisplayBitmap));
            
@@ -32,8 +30,6 @@ namespace MyAssignment
             {
                commandParser = new(commandParser.ShapePoint,color,Graphics.FromImage(MyDraw.DisplayBitmap),CommandLine.Lines);
             }
-
-
             else
             {
               commandParser = new(commandParser.ShapePoint,color, Graphics.FromImage(MyDraw.DisplayBitmap), InputField.Lines);
@@ -78,8 +74,6 @@ namespace MyAssignment
         {
             get { return syntaxChecks; }
         }
-
-      
 
         private void CommandLine_KeyDown(object sender, KeyEventArgs e)
         {

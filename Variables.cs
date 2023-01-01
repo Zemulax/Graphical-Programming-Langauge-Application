@@ -7,11 +7,11 @@ namespace MyAssignment
     /// </summary>
     public class Variables
     {
-        private static Dictionary<string,int> variablesDictionary= new();
+        private static Dictionary<string, int> variablesDictionary = new();
         private static readonly List<int> variableints = new();
-        public Variables() 
+        public Variables()
         {
-           
+
         }
 
         /// <summary>
@@ -19,11 +19,11 @@ namespace MyAssignment
         /// for drawing commands
         /// </summary>
         /// <param name="variablesCollected">the dictionary to be processed</param>
-        public void VariableProcessor (Dictionary<string, int> variablesCollected)
+        public void VariableProcessor(Dictionary<string, int> variablesCollected)
         {
             foreach (KeyValuePair<string, int> variables in variablesCollected)
             {
-                variablesDictionary.Add(variables.Key, variables.Value);
+                variablesDictionary.Add(variables.Key, variables.Value); //argument exception
                 variableints.Add(variables.Value);
             }
         }
@@ -32,11 +32,11 @@ namespace MyAssignment
         /// dictionary property
         /// allows use of dictionary outside of this class
         /// </summary>
-        public static Dictionary<string,int> VariablesDictionary
+        public static Dictionary<string, int> VariablesDictionary
         {
             get { return variablesDictionary; }
             set { variablesDictionary = value; }
-            
+
         }
 
         /// <summary>
@@ -47,6 +47,6 @@ namespace MyAssignment
         {
             get { return variableints; }
         }
-        
+
     }
 }

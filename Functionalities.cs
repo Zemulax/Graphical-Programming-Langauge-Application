@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// this is a class for functionalities in the program
@@ -25,10 +19,10 @@ namespace MyAssignment
         /// <returns>returns file contents to the command line</returns>
         public string LoadProgram()
         {
-            
+
             OpenFileDialog openFileDialog = new();
 
-           
+
             openFileDialog.ShowDialog();
             if (openFileDialog.FileName != "")
             {
@@ -58,14 +52,14 @@ namespace MyAssignment
                 writer.Close();
             }
             return file;
-            
+
         }
 
         public string File
         {
-            get { return file; }   
+            get { return file; }
             set { file = value; }
         }
-       
+
     }
 }

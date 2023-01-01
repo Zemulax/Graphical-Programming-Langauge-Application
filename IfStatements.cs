@@ -1,7 +1,4 @@
-﻿
-using System.Collections;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// classs used to execute code determined by 
@@ -9,7 +6,7 @@ namespace MyAssignment
     /// </summary>
     public class IfStatements
     {
-        private readonly Dictionary<string, int> ifstatementsDictionary= new();
+        private readonly Dictionary<string, int> ifstatementsDictionary = new();
         static int shapeParameter = 0;
         static readonly string[] methodlines = new string[2];
 
@@ -20,43 +17,54 @@ namespace MyAssignment
         /// </summary>
         /// <param name="ifStatementsList">an if statement block to be processed</param>
         /// <param name="graphihcs">a drawing surface for commands in if statements</param>
-        public IfStatements(List<string> ifStatementsList) 
+        public IfStatements(List<string> ifStatementsList)
         {
-            string[] ifstatementSplit = ifStatementsList[0].Split(" "); //if mozay = 90; line1 ;line2 ;endif
-            ifstatementsDictionary.Add(ifstatementSplit[1], int.Parse(ifstatementSplit[3])); //take specific values from the array
-
-
-            string[] line1 = ifStatementsList[1].Split(" ");
-            string[] line2 = ifStatementsList[2].Split(" ");
-
-           
-            methodlines[0] = line1[1];
-            methodlines[1] = line2[1];
-
-            foreach (KeyValuePair<string, int> pairs in Variables.VariablesDictionary)
+            try
             {
-                MessageBox.Show("here");
 
-                if (ifstatementsDictionary.ContainsKey(pairs.Key.Trim()))
+                string[] ifstatementSplit = ifStatementsList[0].Split(" "); //if mozay = 90; line1 ;line2 ;endif
+                ifstatementsDictionary.Add(ifstatementSplit[1], int.Parse(ifstatementSplit[3])); //take specific values from the array
+
+
+                string[] line1 = ifStatementsList[1].Split(" ");
+                string[] line2 = ifStatementsList[2].Split(" ");
+
+
+                methodlines[0] = line1[1];
+                methodlines[1] = line2[1];
+
+                foreach (KeyValuePair<string, int> pairs in Variables.VariablesDictionary)
                 {
-                    
-                    if (ifstatementsDictionary.ContainsValue(pairs.Value))
+
+                    if (ifstatementsDictionary.ContainsKey(pairs.Key.Trim()))
                     {
 
-                        shapeParameter = pairs.Value;
+                        if (ifstatementsDictionary.ContainsValue(pairs.Value))
+                        {
 
+                            shapeParameter = pairs.Value;
+
+                        }
+                        else
+                        {
+                            Form1.ErrorMessages.Add("Condition returned false");
+                            break;
+                        }
                     }
                     else
                     {
-                        Form1.ErrorMessages.Add("Condition returned false");
+                        Form1.ErrorMessages.Add("That variable was not found");
                     }
-                }
-                else
-                {
-                    Form1.ErrorMessages.Add("That variable was not found");
+
+
                 }
 
-                
+            }
+
+            catch (IndexOutOfRangeException)
+            {
+                Form1.ErrorMessages.Add("If statement was not properly created!");
+
             }
 
         }

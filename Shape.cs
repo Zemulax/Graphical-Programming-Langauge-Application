@@ -8,19 +8,19 @@ namespace MyAssignment
     {
         protected Point mypoint = new()
         {
-            X = 100,
-            Y = 50
+            X = 0,
+            Y = 0
         };
         protected Color shapecolor;
         protected bool fill;
-        Brush shapeBrush;
-        Pen shapePen;
-        
+        Brush shapeBrush = new SolidBrush(Color.White);
+        Pen shapePen = new(Color.White, 4);
+
         /// <summary>
         /// empty constructor
         /// </summary>
-        public Shape(){}
-       
+        public Shape() { }
+
         /// <summary>
         /// base constructor for all classes
         /// </summary>
@@ -30,8 +30,7 @@ namespace MyAssignment
         {
             mypoint = point;
             this.shapecolor = shapecolor;
-           // MessageBox.Show("" + mypoint);
-            
+
         }
 
 
@@ -39,7 +38,7 @@ namespace MyAssignment
         {
             set { mypoint = value; }
             get { return mypoint; }
-            
+
         }
 
         public Color ShapeColor
@@ -59,10 +58,10 @@ namespace MyAssignment
             get { return shapePen; }
         }
 
-       /// <summary>
-       /// Every object of shape must have this method
-       /// </summary>
-       /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
+        /// <summary>
+        /// Every object of shape must have this method
+        /// </summary>
+        /// <param name="graphics">the drawing surface where the shape object will be drawn</param>
         public abstract void DrawShape(Graphics graphics);
 
         public virtual void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
@@ -76,5 +75,5 @@ namespace MyAssignment
             mypoint.Y = coordinates[1];
         }
     }
-    
+
 }

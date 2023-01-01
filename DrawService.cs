@@ -18,7 +18,7 @@ namespace MyAssignment
         public DrawService(Graphics graphics)
         {
             this.graphics = graphics;
-            
+
         }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace MyAssignment
         {
             GC.SuppressFinalize(this);
         }
-        
+
         /// <summary>
         /// bitmap property
         /// returns bitmap object
@@ -45,9 +45,9 @@ namespace MyAssignment
         public Graphics Graphic
         {
             get { return graphics; }
-            
+
         }
-       
+
 
     }
 }

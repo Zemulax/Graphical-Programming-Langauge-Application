@@ -13,13 +13,13 @@ namespace MyAssignment
         /// empty constructor
         /// </summary>
         public Circle() : base() { }
-        
-       /// <summary>
-       /// class constructor
-       /// </summary>
-       /// <param name="point">x and y axis where the object will be drawn</param>
-       /// <param name="radius">radius of the circle to be drawn</param>
-        public Circle(Point point, Color color, int radius): base(point, color)
+
+        /// <summary>
+        /// class constructor
+        /// </summary>
+        /// <param name="point">x and y axis where the object will be drawn</param>
+        /// <param name="radius">radius of the circle to be drawn</param>
+        public Circle(Point point, Color color, int radius) : base(point, color)
         {
             this.radius = radius;
         }
@@ -32,7 +32,6 @@ namespace MyAssignment
 
         public override void DrawShape(Graphics graphics)
         {
-            // shapePen = new(Color.White);
             if (fill == true)
             {
                 graphics.FillEllipse(ShapeBrush, ShapePoint.X, ShapePoint.Y, radius, radius);
@@ -54,13 +53,13 @@ namespace MyAssignment
             set { radius = value; }
         }
 
-        
+
         /// <summary>
         /// draw method for circle class
         /// this method draws the rectangle with specified parameters
         /// </summary>
         /// <param name="graphics">specifies where the drawing will be done</param>
         /// <param name="fill">determines whether the circle should be colored or outlined</param>
-       
+
     }
 }

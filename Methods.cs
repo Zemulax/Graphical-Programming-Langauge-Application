@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// method class is used to implement
@@ -12,7 +6,7 @@ namespace MyAssignment
     /// </summary>
     public class Methods
     {
-        public string[] methodLines =  new string[2];
+        public string[] methodLines = new string[2];
         public string[] methodname;
         public Methods() { }
 
@@ -22,7 +16,7 @@ namespace MyAssignment
         /// </summary>
         /// <param name="collectedMethod">a collection which contains method definition elements</param>
         public void MethodsProcessor(List<string> collectedMethod)
-        { 
+        {
             methodname = collectedMethod[0].Split(' ');
             methodLines[0] = collectedMethod[1];
         }

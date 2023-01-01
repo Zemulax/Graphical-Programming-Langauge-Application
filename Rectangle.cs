@@ -13,7 +13,7 @@ namespace MyAssignment
         /// <summary>
         /// empty constructor
         /// </summary>
-        public Rectangle():base()
+        public Rectangle() : base()
         {
         }
         /// <summary>
@@ -23,7 +23,7 @@ namespace MyAssignment
         /// <param name="yPos">the y axis where the rectangle will be drawn</param>
         /// <param name="width">width of the rectangle to be drawn</param>
         /// <param name="length">length of the rectangle to be drawn</param>
-        public Rectangle(Point point, Color color, int width, int length): base(point,color)
+        public Rectangle(Point point, Color color, int width, int length) : base(point, color)
         {
             this.width = width;
             this.length = length;
@@ -73,14 +73,18 @@ namespace MyAssignment
         /// <param name="fill">specifies whether the object should be colored or outlined</param>
         public override void DrawShape(Graphics graphics)
         {
-            if (this.fill == true)
+            if (fill == true)
             {
                 graphics.FillRectangle(ShapeBrush, ShapePoint.X, ShapePoint.Y, Width, Length);
+
             }
             else
             {
+
                 graphics.DrawRectangle(ShapePen, ShapePoint.X, ShapePoint.Y, Width, Length);
             }
+
+
         }
 
     }

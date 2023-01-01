@@ -1,18 +1,11 @@
-﻿using DocumentFormat.OpenXml.Drawing;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// shape factory class is used to manufacture shapes
     /// </summary>
     public class ShapeFactory
     {
-        public Shape GetShape(string shape)
+        public static Shape GetShape(string shape)
         {
             if (shape.Equals("rectangle"))
             {

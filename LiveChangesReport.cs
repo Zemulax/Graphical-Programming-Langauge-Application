@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// class for checking user input for errors
@@ -17,7 +11,7 @@ namespace MyAssignment
         /// incorrect user inputs
         /// </summary>
         /// <param name="syntax">an array of commands to be checked for errors</param>
-        public LiveChangesReport(string[] syntax) 
+        public LiveChangesReport(string[] syntax)
         {
             for (int s = 0; s < syntax.Length; s++)
             {

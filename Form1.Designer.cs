@@ -235,6 +235,7 @@
             this.Controls.Add(this.Enter);
             this.Controls.Add(this.MainDisplay);
             this.Controls.Add(this.InputField);
+            this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.MainDisplay)).EndInit();

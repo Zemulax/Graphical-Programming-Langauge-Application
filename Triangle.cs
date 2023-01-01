@@ -7,12 +7,12 @@ namespace MyAssignment
     public class Triangle : Shape
     {
 
-        public Triangle():base() { }
+        public Triangle() : base() { }
         /// <summary>
         /// triangle constructor
         /// </summary>
         /// <param name="points"></param>
-        public Triangle(Point points,Color color) : base(points,color)
+        public Triangle(Point points, Color color) : base(points, color)
         {
         }
 
@@ -26,7 +26,7 @@ namespace MyAssignment
             graphics.DrawLine(ShapePen, 180, 200, 50, 320);
             graphics.DrawLine(ShapePen, 50, 320, 320, 320);
             graphics.DrawLine(ShapePen, 320, 320, 180, 200);
-            
+
         }
     }
 }

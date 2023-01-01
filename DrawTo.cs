@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MyAssignment
+﻿namespace MyAssignment
 {
     /// <summary>
     /// draw to class used to draw a line
@@ -12,21 +6,21 @@ namespace MyAssignment
     /// </summary>
     public class DrawTo : Shape
     {
-       private Point points = new()
+        private Point points = new()
         {
             X = 0,
             Y = 0
 
         };
 
-        
-        public DrawTo(): base() { }
+
+        public DrawTo() : base() { }
         /// <summary>
         /// constructor for line objects
         /// </summary>
         /// <param name="point">starting point for drawing the line</param>
         /// <param name="points">ending point for drawing the line</param>
-        public DrawTo(Point point, Color color, Point points) : base(point,color)
+        public DrawTo(Point point, Color color, Point points) : base(point, color)
         {
             this.points = points;
         }
@@ -34,7 +28,7 @@ namespace MyAssignment
 
         public override void Set(Color color, bool fill, Brush shapeBrush, Pen shapePen, params int[] coordinates)
         {
-            base.Set(color, fill, shapeBrush, shapePen, coordinates[0],coordinates[1]);
+            base.Set(color, fill, shapeBrush, shapePen, coordinates[0], coordinates[1]);
             points.X = coordinates[2];
             points.Y = coordinates[3];
 
@@ -46,7 +40,7 @@ namespace MyAssignment
         /// <param name="fill">not needed here</param>
         public override void DrawShape(Graphics graphics)
         {
-          graphics.DrawLine(ShapePen, ShapePoint, points);
+            graphics.DrawLine(ShapePen, ShapePoint, points);
         }
 
     }

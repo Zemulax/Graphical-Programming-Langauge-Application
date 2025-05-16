@@ -2,7 +2,7 @@
 
 
 This is my assignment that I undertook in third year at uni.
-It was all about creating a program that behaved like a progamming language with sequene and iteration.
+It was all about creating a program that behaved like a progamming language with sequence and iteration.
 Users would type syntax to cause the program to draw lines on a canvas
 
 The concepts were:
